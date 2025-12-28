@@ -18,7 +18,8 @@
     "format": "biome check --write .",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "bun run build && changeset publish"
+    "release": "bun run build && changeset publish",
+    "create": "./scripts/create-package.sh"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",
