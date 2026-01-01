@@ -1,6 +1,6 @@
 import {
   BoxRenderable,
-  hexToRgb,
+  parseColor,
   type RenderContext,
   RGBA,
 } from "@opentui/core";
@@ -45,14 +45,17 @@ export class DialogRenderable extends BoxRenderable {
       options.dialog.style,
     );
 
-    const backdropColor = computedStyle.backdropColor
-      ? hexToRgb(computedStyle.backdropColor)
-      : RGBA.fromInts(0, 0, 0, 255);
     const backdropOpacity = normalizeOpacity(
       computedStyle.backdropOpacity,
       DEFAULT_DIALOG_STYLE.backdropOpacity,
       "@opentui-ui/dialog",
     );
+
+    const backdropColor = computedStyle.backdropColor
+      ? parseColor(computedStyle.backdropColor)
+      : RGBA.fromInts(0, 0, 0, backdropOpacity / 255);
+
+    backdropColor.a = backdropOpacity / 255;
 
     const isDeferred =
       (options.dialog as DialogWithDeferred)[DEFERRED_KEY] === true;
@@ -66,12 +69,7 @@ export class DialogRenderable extends BoxRenderable {
       height: ctx.height,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: RGBA.fromValues(
-        backdropColor.r,
-        backdropColor.g,
-        backdropColor.b,
-        backdropOpacity / 255,
-      ),
+      backgroundColor: backdropColor,
       onMouseUp: () => this.handleBackdropClick(),
       visible: !isDeferred,
     });
