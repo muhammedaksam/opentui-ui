@@ -273,16 +273,10 @@ export function DialogProvider(props: DialogProviderProps) {
   }, [container, storeVersion]);
 
   useLayoutEffect(() => {
-    if (deferredDialogs.length === 0) return;
-
     for (const dialogRenderable of deferredDialogs) {
       dialogRenderable.reveal();
     }
-
-    // This is safe now because new dialogs are visible
-    // This prevents the backdrop flash when stacking dialogs
-    container.updateTopmostStates();
-  }, [deferredDialogs, container]);
+  }, [deferredDialogs]);
 
   return (
     <DialogContext.Provider value={manager}>

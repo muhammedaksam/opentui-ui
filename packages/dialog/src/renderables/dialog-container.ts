@@ -1,6 +1,6 @@
 import { BoxRenderable, type RenderContext } from "@opentui/core";
 
-import { DEFERRED_KEY, DIALOG_Z_INDEX } from "../constants";
+import { DIALOG_Z_INDEX } from "../constants";
 import type { DialogManager } from "../manager";
 import type {
   Dialog,
@@ -130,20 +130,13 @@ export class DialogContainerRenderable extends BoxRenderable {
       isTopmost,
       onRemove: (d) => this.handleDialogRemoved(d),
       onBackdropClick: () => this._manager.close(dialog.id),
+      onReveal: () => this.updateTopmostStates(),
     });
 
     this._dialogRenderables.set(dialog.id, dialogRenderable);
     this.add(dialogRenderable);
 
-    // For deferred dialogs (React/framework JSX), skip updateTopmostStates here.
-    // The framework adapter will call it after reveal() to prevent backdrop flash.
-    const isDeferred =
-      (dialog as Dialog & { [DEFERRED_KEY]?: boolean })[DEFERRED_KEY] === true;
-
-    if (!isDeferred) {
-      this.updateTopmostStates();
-    }
-
+    this.updateTopmostStates();
     this.requestRender();
   }
 
@@ -153,13 +146,30 @@ export class DialogContainerRenderable extends BoxRenderable {
     return dialogs[dialogs.length - 1]?.id === dialogId;
   }
 
-  /**
-   * @internal Exposed for React adapter to call after reveal()
-   */
-  public updateTopmostStates(): void {
+  private updateTopmostStates(): void {
     const dialogs = this._manager.getDialogs();
-    const topmostId =
-      dialogs.length > 0 ? dialogs[dialogs.length - 1]?.id : undefined;
+    if (dialogs.length === 0) return;
+
+    const topmostId = dialogs[dialogs.length - 1]?.id;
+    const topmostRenderable = topmostId
+      ? this._dialogRenderables.get(topmostId)
+      : undefined;
+
+    // Determine effective backdrop mode
+    const backdropMode =
+      this._options.dialogOptions?.backdropMode ??
+      this._options.backdropMode ??
+      "top-only";
+
+    // In "top-only" mode, if the topmost dialog isn't revealed yet (deferred),
+    // keep the previous dialog's backdrop to prevent flash during portal mounting
+    if (
+      backdropMode === "top-only" &&
+      topmostRenderable &&
+      !topmostRenderable.isRevealed
+    ) {
+      return;
+    }
 
     for (const [id, renderable] of this._dialogRenderables) {
       renderable.setIsTopmost(id === topmostId);

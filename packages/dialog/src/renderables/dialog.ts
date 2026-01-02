@@ -22,6 +22,7 @@ export interface DialogRenderableOptions {
   isTopmost: boolean;
   onRemove?: (dialog: Dialog) => void;
   onBackdropClick?: () => void;
+  onReveal?: () => void;
 }
 
 export class DialogRenderable extends BoxRenderable {
@@ -31,6 +32,7 @@ export class DialogRenderable extends BoxRenderable {
   private __contentBox: BoxRenderable;
   private _onRemove?: (dialog: Dialog) => void;
   private _onBackdropClick?: () => void;
+  private _onReveal?: () => void;
   private _closed: boolean = false;
   private _revealed: boolean = false;
   private _isTopmost: boolean;
@@ -75,6 +77,7 @@ export class DialogRenderable extends BoxRenderable {
     this._containerOptions = options.containerOptions;
     this._onRemove = options.onRemove;
     this._onBackdropClick = options.onBackdropClick;
+    this._onReveal = options.onReveal;
     this._revealed = !isDeferred;
     this._isTopmost = options.isTopmost;
 
@@ -198,11 +201,19 @@ export class DialogRenderable extends BoxRenderable {
     this.requestRender();
   }
 
+  /**
+   * @internal Exposed for React adapter to reveal deferred dialogs
+   */
   public reveal(): void {
     if (this._revealed) return;
     this._revealed = true;
     this.visible = true;
+    this._onReveal?.();
     this.requestRender();
+  }
+
+  public get isRevealed(): boolean {
+    return this._revealed;
   }
 
   public close(): void {
