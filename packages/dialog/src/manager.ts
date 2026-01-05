@@ -44,7 +44,7 @@ type AlertContent = (
 ) => Renderable;
 
 /** Content factory for choice dialogs. */
-type ChoiceContent<K extends string> = (
+type ChoiceContent<K> = (
   renderCtx: RenderContext,
   choiceCtx: ChoiceContext<K>,
 ) => Renderable;
@@ -70,14 +70,14 @@ export interface AlertOptions extends BaseAlertOptions<AlertContent> {}
  * Options for a choice dialog using core renderables.
  * @template K The type of keys for the available choices.
  */
-export interface ChoiceOptions<K extends string>
-  extends BaseChoiceOptions<ChoiceContent<K>> {}
+export interface ChoiceOptions<K>
+  extends BaseChoiceOptions<ChoiceContent<K>, K> {}
 
 /**
  * Extended DialogShowOptions for async dialog factory functions.
  * @template T The type of value returned on dismiss.
  */
-export interface PromptShowOptions<T> extends DialogShowOptions {
+export interface AsyncShowOptions<T> extends DialogShowOptions {
   /** Fallback value when dialog is dismissed via ESC or backdrop click. */
   fallback?: T;
 }
@@ -110,11 +110,21 @@ export class DialogManager {
   }
 
   private saveFocus(): void {
+    this.cancelPendingFocusRestore();
     this.savedFocus = this.ctx.currentFocusedRenderable;
     this.savedFocus?.blur();
   }
 
+  private cancelPendingFocusRestore(): void {
+    if (this.focusRestoreTimeout) {
+      clearTimeout(this.focusRestoreTimeout);
+      this.focusRestoreTimeout = undefined;
+    }
+  }
+
   private restoreFocus(): void {
+    this.cancelPendingFocusRestore();
+
     if (this.savedFocus && !this.savedFocus.isDestroyed) {
       // Defer to next tick to ensure dialog is fully removed from render tree
       this.focusRestoreTimeout = setTimeout(() => {
@@ -236,7 +246,6 @@ export class DialogManager {
       const dialog: Dialog = {
         ...options,
         id,
-        closeOnClickOutside: options.closeOnClickOutside ?? false,
       };
       this.addDialog(dialog);
       dialog.onOpen?.();
@@ -391,7 +400,6 @@ export class DialogManager {
           showOptions.onClose?.();
           safeResolve(fallback ?? defaultDismissValue);
         },
-        closeOnClickOutside: showOptions.closeOnClickOutside ?? false,
       });
     });
   }
@@ -406,7 +414,7 @@ export class DialogManager {
    * @template T The type of value the prompt resolves to.
    *
    * Accepts either PromptOptions (for imperative usage) or a factory function
-   * that receives the prompt context and returns PromptShowOptions (for framework adapters).
+   * that receives the prompt context and returns AsyncShowOptions (for framework adapters).
    *
    * @example
    * ```ts
@@ -427,12 +435,12 @@ export class DialogManager {
    */
   prompt<T>(options: PromptOptions<T>): Promise<T | undefined>;
   prompt<T>(
-    showFactory: (ctx: PromptContext<T>) => PromptShowOptions<T | undefined>,
+    showFactory: (ctx: PromptContext<T>) => AsyncShowOptions<T | undefined>,
   ): Promise<T | undefined>;
   prompt<T>(
     input:
       | PromptOptions<T>
-      | ((ctx: PromptContext<T>) => PromptShowOptions<T | undefined>),
+      | ((ctx: PromptContext<T>) => AsyncShowOptions<T | undefined>),
   ): Promise<T | undefined> {
     return this.showAsyncDialog<T | undefined>((safeResolve, dialogId) => {
       const ctx: PromptContext<T> = {
@@ -460,7 +468,7 @@ export class DialogManager {
    * @returns `true` if confirmed, `false` if cancelled or dismissed.
    *
    * Accepts either ConfirmOptions (for imperative usage) or a factory function
-   * that receives the confirm context and returns DialogShowOptions (for framework adapters).
+   * that receives the confirm context and returns AsyncShowOptions (for framework adapters).
    *
    * @example
    * ```ts
@@ -487,17 +495,30 @@ export class DialogManager {
    */
   confirm(options: ConfirmOptions): Promise<boolean>;
   confirm(
-    showFactory: (ctx: ConfirmContext) => DialogShowOptions,
+    showFactory: (ctx: ConfirmContext) => AsyncShowOptions<boolean>,
   ): Promise<boolean>;
   confirm(
-    input: ConfirmOptions | ((ctx: ConfirmContext) => DialogShowOptions),
+    input:
+      | ConfirmOptions
+      | ((ctx: ConfirmContext) => AsyncShowOptions<boolean>),
   ): Promise<boolean> {
     return this.showAsyncDialog<boolean>((safeResolve, dialogId) => {
       const ctx: ConfirmContext = {
         resolve: safeResolve,
+        dismiss: () => safeResolve(false),
         dialogId,
       };
-      return { showOptions: this.buildShowOptions(input, ctx) };
+
+      if (typeof input === "function") {
+        const result = input(ctx);
+        return { showOptions: result, fallback: result.fallback };
+      }
+
+      const { fallback, ...rest } = input;
+      return {
+        showOptions: this.buildShowOptions(rest, ctx),
+        fallback,
+      };
     }, false);
   }
 
@@ -546,7 +567,7 @@ export class DialogManager {
    * @returns The selected key, or `undefined` if cancelled or dismissed.
    *
    * Accepts either ChoiceOptions (for imperative usage) or a factory function
-   * that receives the choice context and returns DialogShowOptions (for framework adapters).
+   * that receives the choice context and returns AsyncShowOptions (for framework adapters).
    *
    * @example
    * ```ts
@@ -573,12 +594,14 @@ export class DialogManager {
    * });
    * ```
    */
-  choice<K extends string>(options: ChoiceOptions<K>): Promise<K | undefined>;
-  choice<K extends string>(
-    showFactory: (ctx: ChoiceContext<K>) => DialogShowOptions,
+  choice<K>(options: ChoiceOptions<K>): Promise<K | undefined>;
+  choice<K>(
+    showFactory: (ctx: ChoiceContext<K>) => AsyncShowOptions<K | undefined>,
   ): Promise<K | undefined>;
-  choice<K extends string>(
-    input: ChoiceOptions<K> | ((ctx: ChoiceContext<K>) => DialogShowOptions),
+  choice<K>(
+    input:
+      | ChoiceOptions<K>
+      | ((ctx: ChoiceContext<K>) => AsyncShowOptions<K | undefined>),
   ): Promise<K | undefined> {
     return this.showAsyncDialog<K | undefined>((safeResolve, dialogId) => {
       const ctx: ChoiceContext<K> = {
@@ -586,7 +609,17 @@ export class DialogManager {
         dismiss: () => safeResolve(undefined),
         dialogId,
       };
-      return { showOptions: this.buildShowOptions(input, ctx) };
+
+      if (typeof input === "function") {
+        const result = input(ctx);
+        return { showOptions: result, fallback: result.fallback };
+      }
+
+      const { fallback, ...rest } = input;
+      return {
+        showOptions: this.buildShowOptions(rest, ctx),
+        fallback,
+      };
     }, undefined);
   }
 
@@ -595,11 +628,7 @@ export class DialogManager {
     if (this.destroyed) return;
     this.destroyed = true;
 
-    if (this.focusRestoreTimeout) {
-      clearTimeout(this.focusRestoreTimeout);
-      this.focusRestoreTimeout = undefined;
-    }
-
+    this.cancelPendingFocusRestore();
     this.savedFocus = null;
     this.subscribers.clear();
     this.dialogs = [];

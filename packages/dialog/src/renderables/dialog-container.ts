@@ -1,13 +1,12 @@
 import { BoxRenderable, type RenderContext } from "@opentui/core";
-
 import { DIALOG_Z_INDEX } from "../constants";
 import type { DialogManager } from "../manager";
 import type {
-  Dialog,
   DialogContainerOptions,
   DialogId,
   DialogOptions,
   DialogSize,
+  InternalDialog,
 } from "../types";
 import { isDialogToClose } from "../types";
 import { DialogRenderable } from "./dialog";
@@ -47,9 +46,11 @@ export class DialogContainerRenderable extends BoxRenderable {
       position: "absolute",
       left: 0,
       top: 0,
-      width: 0,
-      height: 0,
+      width: ctx.width,
+      height: ctx.height,
       zIndex: DIALOG_Z_INDEX,
+      alignItems: "center",
+      justifyContent: "center",
     });
 
     this._manager = options.manager;
@@ -79,14 +80,16 @@ export class DialogContainerRenderable extends BoxRenderable {
    * Handle keyboard events. Returns true if handled (e.g., ESC closed a dialog).
    */
   private handleKeyboard = (evt: DialogKeyboardEvent): boolean => {
-    if (this._options.closeOnEscape === false) {
-      return false;
-    }
-
     const key = evt.name;
     if (key === "escape" && this._dialogRenderables.size > 0) {
       const topDialog = this.getTopDialogRenderable();
       if (topDialog) {
+        // Per-dialog closeOnEscape takes precedence over container-level
+        const closeOnEscape =
+          topDialog.dialog.closeOnEscape ?? this._options.closeOnEscape;
+        if (closeOnEscape === false) {
+          return false;
+        }
         evt.preventDefault?.();
         this._manager.close(topDialog.dialog.id);
         return true;
@@ -114,7 +117,7 @@ export class DialogContainerRenderable extends BoxRenderable {
     return this._dialogRenderables;
   }
 
-  private addOrUpdateDialog(dialog: Dialog): void {
+  private addOrUpdateDialog(dialog: InternalDialog): void {
     const existing = this._dialogRenderables.get(dialog.id);
 
     if (existing) {
@@ -122,81 +125,38 @@ export class DialogContainerRenderable extends BoxRenderable {
       this.removeDialog(dialog.id);
     }
 
-    const isTopmost = this.isTopmostDialog(dialog.id);
-
     const dialogRenderable = new DialogRenderable(this.ctx, {
       dialog,
       containerOptions: this._options,
-      isTopmost,
-      onRemove: (d) => this.handleDialogRemoved(d),
-      onBackdropClick: () => this._manager.close(dialog.id),
-      onReveal: () => this.updateTopmostStates(),
+      onRequestClose: (id) => this._manager.close(id),
     });
 
     this._dialogRenderables.set(dialog.id, dialogRenderable);
     this.add(dialogRenderable);
 
-    this.updateTopmostStates();
     this.requestRender();
   }
 
-  private isTopmostDialog(dialogId: DialogId): boolean {
-    const dialogs = this._manager.getDialogs();
-    if (dialogs.length === 0) return true;
-    return dialogs[dialogs.length - 1]?.id === dialogId;
-  }
-
-  private updateTopmostStates(): void {
-    const dialogs = this._manager.getDialogs();
-    if (dialogs.length === 0) return;
-
-    const topmostId = dialogs[dialogs.length - 1]?.id;
-    const topmostRenderable = topmostId
-      ? this._dialogRenderables.get(topmostId)
-      : undefined;
-
-    // Determine effective backdrop mode
-    const backdropMode =
-      this._options.dialogOptions?.backdropMode ??
-      this._options.backdropMode ??
-      "top-only";
-
-    // In "top-only" mode, if the topmost dialog isn't revealed yet (deferred),
-    // keep the previous dialog's backdrop to prevent flash during portal mounting
-    if (
-      backdropMode === "top-only" &&
-      topmostRenderable &&
-      !topmostRenderable.isRevealed
-    ) {
-      return;
-    }
-
-    for (const [id, renderable] of this._dialogRenderables) {
-      renderable.setIsTopmost(id === topmostId);
-    }
-  }
-
   private removeDialog(id: DialogId): void {
-    const dialog = this._dialogRenderables.get(id);
-    if (dialog) {
-      dialog.close();
-    }
-  }
-
-  private handleDialogRemoved(dialog: Dialog): void {
-    const renderable = this._dialogRenderables.get(dialog.id);
+    const renderable = this._dialogRenderables.get(id);
     if (renderable) {
-      this._dialogRenderables.delete(dialog.id);
+      this._dialogRenderables.delete(id);
       this.remove(renderable.id);
-      renderable.destroy();
-      this.updateTopmostStates();
+      renderable.destroyRecursively();
       this.requestRender();
     }
   }
 
-  public updateDimensions(width: number): void {
+  public updateDimensions(width: number, height?: number): void {
+    const h = height ?? this._ctx.height;
+
+    // Update container dimensions
+    this.width = width;
+    this.height = h;
+
+    // Update dialog dimensions
     for (const [, renderable] of this._dialogRenderables) {
-      renderable.updateDimensions(width);
+      renderable.updateDimensions(width, h);
     }
   }
 
@@ -216,6 +176,22 @@ export class DialogContainerRenderable extends BoxRenderable {
     this._options.closeOnEscape = value;
   }
 
+  public set closeOnClickOutside(value: boolean) {
+    this._options.closeOnClickOutside = value;
+  }
+
+  public set backdropColor(value: string) {
+    this._options.backdropColor = value;
+  }
+
+  public set backdropOpacity(value: number | string) {
+    this._options.backdropOpacity = value;
+  }
+
+  public set unstyled(value: boolean) {
+    this._options.unstyled = value;
+  }
+
   public override destroy(): void {
     if (this._destroyed) return;
     this._destroyed = true;
@@ -225,8 +201,9 @@ export class DialogContainerRenderable extends BoxRenderable {
 
     this._ctx.keyInput.off("keypress", this.handleKeyboard);
 
+    // Clean up dialog renderables
     for (const [, renderable] of this._dialogRenderables) {
-      renderable.destroy();
+      renderable.destroyRecursively();
     }
     this._dialogRenderables.clear();
 

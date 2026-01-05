@@ -2,9 +2,16 @@ import {
   BoxRenderable,
   parseColor,
   type RenderContext,
-  RGBA,
+  type RGBA,
 } from "@opentui/core";
-import type { Dialog, DialogContainerOptions } from "../types";
+import { normalizeOpacity } from "@opentui-ui/utils";
+import { JSX_CONTENT_KEY } from "../constants";
+import { DEFAULT_BACKDROP_COLOR, DEFAULT_BACKDROP_OPACITY } from "../themes";
+import type {
+  DialogContainerOptions,
+  DialogId,
+  InternalDialog,
+} from "../types";
 import {
   type ComputedDialogStyle,
   computeDialogStyle,
@@ -12,48 +19,28 @@ import {
 } from "../utils";
 
 export interface DialogRenderableOptions {
-  dialog: Dialog;
-  containerOptions?: DialogContainerOptions;
-  isTopmost: boolean;
-  onRemove?: (dialog: Dialog) => void;
-  onBackdropClick?: () => void;
-  onReveal?: () => void;
+  dialog: InternalDialog;
+  containerOptions: DialogContainerOptions;
+  /** Request the manager to close this dialog. */
+  onRequestClose?: (id: DialogId) => void;
 }
 
 export class DialogRenderable extends BoxRenderable {
-  private _dialog: Dialog;
+  private _dialog: InternalDialog;
   private _computedStyle: ComputedDialogStyle;
-  private _containerOptions?: DialogContainerOptions;
+  private _containerOptions: DialogContainerOptions;
+  private _onRequestClose?: (id: DialogId) => void;
+  private _backdrop: BoxRenderable;
   private _contentBox: BoxRenderable;
-  private _onRemove?: (dialog: Dialog) => void;
-  private _onBackdropClick?: () => void;
-  private _onReveal?: () => void;
-  private _closed: boolean = false;
-  private _revealed: boolean = false;
-  private _isTopmost: boolean;
 
   constructor(ctx: RenderContext, options: DialogRenderableOptions) {
-    const computedStyle = computeDialogStyle({
-      dialog: options.dialog,
-      containerOptions: options.containerOptions,
-      isTopmost: options.isTopmost,
-    });
+    const { dialog, containerOptions, onRequestClose } = options;
+    const isDeferred = dialog.deferred === true;
 
-    const backdropOpacity =
-      typeof computedStyle.backdropOpacity === "number"
-        ? computedStyle.backdropOpacity
-        : 0;
-
-    const backdropColor = computedStyle.backdropColor
-      ? parseColor(computedStyle.backdropColor)
-      : RGBA.fromInts(0, 0, 0, backdropOpacity / 255);
-
-    backdropColor.a = backdropOpacity / 255;
-
-    const isDeferred = options.dialog.deferred === true;
-
+    // Full-screen transparent container for positioning
+    // Always visible - backdrop needs to show immediately to prevent flash during transitions
     super(ctx, {
-      id: `dialog-${options.dialog.id}`,
+      id: `dialog-${dialog.id}`,
       position: "absolute",
       left: 0,
       top: 0,
@@ -61,56 +48,68 @@ export class DialogRenderable extends BoxRenderable {
       height: ctx.height,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: backdropColor,
-      onMouseUp: () => this.handleBackdropClick(),
-      visible: !isDeferred,
+      visible: true,
     });
 
-    this._dialog = options.dialog;
-    this._computedStyle = computedStyle;
-    this._containerOptions = options.containerOptions;
-    this._onRemove = options.onRemove;
-    this._onBackdropClick = options.onBackdropClick;
-    this._onReveal = options.onReveal;
-    this._revealed = !isDeferred;
-    this._isTopmost = options.isTopmost;
+    this._dialog = dialog;
+    this._containerOptions = containerOptions;
+    this._onRequestClose = onRequestClose;
 
-    this._contentBox = this.createContentPanel();
-    this.add(this._contentBox);
-    this.createContent();
-  }
+    // 1. Create backdrop (full screen overlay)
+    this._backdrop = new BoxRenderable(ctx, {
+      id: `dialog-backdrop-${dialog.id}`,
+      position: "absolute",
+      left: 0,
+      top: 0,
+      width: ctx.width,
+      height: ctx.height,
+      backgroundColor: computeBackdropColor(dialog, containerOptions),
+      visible: true,
+      onMouseUp: () => this.handleBackdropClick(),
+    });
+    this.add(this._backdrop);
 
-  private createContentPanel(): BoxRenderable {
-    const style = this._computedStyle;
-    const padding = style.resolvedPadding;
-
+    // 2. Create content box (styled dialog box)
+    this._computedStyle = computeDialogStyle({ dialog, containerOptions });
     const dialogWidth = getDialogWidth(
-      this._dialog.size,
-      this._containerOptions,
-      this._ctx.width,
+      dialog.size,
+      containerOptions,
+      ctx.width,
     );
+    const padding = this._computedStyle.resolvedPadding;
 
     const panelWidth =
-      typeof style.width === "number" ? style.width : dialogWidth;
+      typeof this._computedStyle.width === "number"
+        ? this._computedStyle.width
+        : dialogWidth;
 
-    const panel = new BoxRenderable(this.ctx, {
-      id: `${this.id}-content`,
+    // Content box: initially hidden when deferred to prevent empty content flash
+    // Visibility is set by framework adapters after portal content is injected
+    this._contentBox = new BoxRenderable(ctx, {
+      id: `dialog-content-${dialog.id}`,
+      position: "absolute",
       width: panelWidth,
-      maxWidth: style.maxWidth ?? this._ctx.width - 2,
-      minWidth: style.minWidth,
-      maxHeight: style.maxHeight,
-      backgroundColor: style.backgroundColor,
-      border: style.border,
-      borderColor: style.borderColor,
-      borderStyle: style.borderStyle,
+      maxWidth: this._computedStyle.maxWidth ?? ctx.width - 2,
+      minWidth: this._computedStyle.minWidth,
+      maxHeight: this._computedStyle.maxHeight,
+      backgroundColor: this._computedStyle.backgroundColor,
+      border: this._computedStyle.border,
+      borderColor: this._computedStyle.borderColor,
+      borderStyle: this._computedStyle.borderStyle,
       paddingTop: padding.top,
       paddingRight: padding.right,
       paddingBottom: padding.bottom,
       paddingLeft: padding.left,
-      onMouseUp: (e) => e.stopPropagation(),
+      visible: !isDeferred,
     });
+    this.add(this._contentBox);
 
-    return panel;
+    if (dialog?.[JSX_CONTENT_KEY]) {
+      // Reconcilers take over rendering the tree from here
+      return;
+    }
+
+    this.createContent();
   }
 
   private createContent(): void {
@@ -141,45 +140,28 @@ export class DialogRenderable extends BoxRenderable {
   }
 
   private handleBackdropClick(): void {
-    if (this._closed) return;
-
     this._dialog.onBackdropClick?.();
 
-    if (this._dialog.closeOnClickOutside === true) {
-      this._onBackdropClick?.();
+    const closeOnClickOutside =
+      this._dialog.closeOnClickOutside ??
+      this._containerOptions.closeOnClickOutside;
+    if (closeOnClickOutside === true) {
+      this._onRequestClose?.(this._dialog.id);
     }
   }
 
-  public setIsTopmost(isTopmost: boolean): void {
-    if (this._isTopmost === isTopmost) return;
-    this._isTopmost = isTopmost;
+  public updateDimensions(width: number, height?: number): void {
+    const h = height ?? this.ctx.height;
 
-    const newStyle = computeDialogStyle({
-      dialog: this._dialog,
-      containerOptions: this._containerOptions,
-      isTopmost,
-    });
-
-    this._computedStyle = newStyle;
-
-    const backdropOpacity =
-      typeof newStyle.backdropOpacity === "number"
-        ? newStyle.backdropOpacity
-        : 0;
-
-    const backdropColor = newStyle.backdropColor
-      ? parseColor(newStyle.backdropColor)
-      : RGBA.fromInts(0, 0, 0, backdropOpacity / 255);
-
-    backdropColor.a = backdropOpacity / 255;
-
-    this.backgroundColor = backdropColor;
-    this.requestRender();
-  }
-
-  public updateDimensions(width: number): void {
+    // Update dialog container
     this.width = width;
+    this.height = h;
 
+    // Update backdrop
+    this._backdrop.width = width;
+    this._backdrop.height = h;
+
+    // Update content box
     const dialogWidth = getDialogWidth(
       this._dialog.size,
       this._containerOptions,
@@ -189,48 +171,39 @@ export class DialogRenderable extends BoxRenderable {
       typeof this._computedStyle.width === "number"
         ? this._computedStyle.width
         : dialogWidth;
+
     this._contentBox.width = panelWidth;
     this._contentBox.maxWidth = this._computedStyle.maxWidth ?? width - 2;
 
     this.requestRender();
   }
 
-  /**
-   * @internal Exposed for React adapter to reveal deferred dialogs
-   */
-  public reveal(): void {
-    if (this._revealed) return;
-    this._revealed = true;
-    this.visible = true;
-    this._onReveal?.();
-    this.requestRender();
-  }
-
-  public get isRevealed(): boolean {
-    return this._revealed;
-  }
-
-  public close(): void {
-    if (this._closed) return;
-    this._closed = true;
-    this._onRemove?.(this._dialog);
-  }
-
-  public get dialog(): Dialog {
+  public get dialog(): InternalDialog {
     return this._dialog;
   }
 
-  /** @internal For framework portal rendering */
+  /**
+   * Get the content box for framework adapters (portal mounting).
+   */
   public get contentBox(): BoxRenderable {
     return this._contentBox;
   }
+}
 
-  public get isClosed(): boolean {
-    return this._closed;
-  }
-
-  public override destroy(): void {
-    this._closed = true;
-    super.destroy();
-  }
+function computeBackdropColor(
+  dialog: InternalDialog,
+  containerOptions: DialogContainerOptions,
+): RGBA {
+  const color =
+    dialog.backdropColor ??
+    containerOptions.backdropColor ??
+    DEFAULT_BACKDROP_COLOR;
+  const opacity = normalizeOpacity(
+    dialog.backdropOpacity ?? containerOptions.backdropOpacity,
+    DEFAULT_BACKDROP_OPACITY,
+    "@opentui-ui/dialog",
+  );
+  const rgba = parseColor(color);
+  rgba.a = opacity / 255;
+  return rgba;
 }

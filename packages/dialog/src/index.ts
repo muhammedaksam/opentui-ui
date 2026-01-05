@@ -13,6 +13,7 @@ export type {
   AlertContext,
   ChoiceContext,
   ConfirmContext,
+  DialogState,
   PromptContext,
 } from "./prompts";
 export { DialogContainerRenderable } from "./renderables";
@@ -28,10 +29,12 @@ export type {
   BaseDialogActions,
   BasePromptOptions,
   Dialog,
-  DialogBackdropMode,
   DialogContainerOptions,
+  DialogContentFactory,
   DialogId,
   DialogShowOptions,
   DialogSize,
   DialogStyle,
+  DialogToClose,
 } from "./types";
+export { isDialogToClose } from "./types";

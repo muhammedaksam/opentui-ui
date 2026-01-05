@@ -1,13 +1,11 @@
 import type { BorderStyle, Renderable, RenderContext } from "@opentui/core";
+import { JSX_CONTENT_KEY } from "./constants";
 
 export type DialogId = string | number;
 
 export type DialogSize = "small" | "medium" | "large" | "full";
 
 export interface DialogStyle {
-  backdropColor?: string;
-  /** 0-1 (number) or "50%" (string). @default 0.59 */
-  backdropOpacity?: number | string;
   backgroundColor?: string;
   borderColor?: string;
   borderStyle?: BorderStyle;
@@ -28,27 +26,39 @@ export interface DialogStyle {
 /** Factory function that creates dialog content from a RenderContext. */
 export type DialogContentFactory = (ctx: RenderContext) => Renderable;
 
-export type DialogBackdropMode = "per-dialog" | "top-only";
-
 export interface Dialog {
   id: DialogId;
   content: DialogContentFactory;
   size?: DialogSize;
   style?: DialogStyle;
   unstyled?: boolean;
-  backdropMode?: DialogBackdropMode;
+  /** @default true */
+  closeOnEscape?: boolean;
   /** @default false */
   closeOnClickOutside?: boolean;
-  /**
-   * When true, the dialog is initially hidden until `reveal()` is called.
-   * Used by framework adapters to prevent flicker when JSX content is
-   * injected via portals after the dialog renderable is created.
-   * @internal
-   */
-  deferred?: boolean;
+  /** Per-dialog backdrop color override. */
+  backdropColor?: string;
+  /** Per-dialog backdrop opacity override. 0-1 (number) or "50%" (string). */
+  backdropOpacity?: number | string;
   onClose?: () => void;
   onOpen?: () => void;
   onBackdropClick?: () => void;
+}
+
+/**
+ * Internal dialog type with adapter-specific properties.
+ * Used by React for deferred visibility.
+ * @internal
+ */
+export interface InternalDialog extends Dialog {
+  /** @internal Used by React/Solid bindings to store JSX portal content. */
+  [JSX_CONTENT_KEY]?: unknown;
+  /**
+   * When true, the dialog is initially hidden until visibility is updated.
+   * Used by adapter(s) to prevent flicker when JSX content is
+   * injected via portals after the dialog renderable is created.
+   */
+  deferred?: boolean;
 }
 
 export interface DialogToClose {
@@ -60,10 +70,12 @@ export interface DialogShowOptions extends Omit<Dialog, "id"> {
   id?: DialogId;
 }
 
+export interface InternalDialogShowOptions extends Omit<InternalDialog, "id"> {
+  id?: DialogId;
+}
+
 export interface DialogOptions {
   style?: DialogStyle;
-  unstyled?: boolean;
-  backdropMode?: DialogBackdropMode;
 }
 
 export interface DialogContainerOptions {
@@ -73,9 +85,13 @@ export interface DialogContainerOptions {
   sizePresets?: Partial<Record<DialogSize, number>>;
   /** @default true */
   closeOnEscape?: boolean;
+  /** @default false */
+  closeOnClickOutside?: boolean;
+  /** @default "#000000" */
+  backdropColor?: string;
+  /** 0-1 (number) or "50%" (string). @default 0.35 */
+  backdropOpacity?: number | string;
   unstyled?: boolean;
-  /** @default "top-only" */
-  backdropMode?: DialogBackdropMode;
 }
 
 // =============================================================================
@@ -111,6 +127,8 @@ export interface BasePromptOptions<T, TContent> extends AsyncDialogOptions {
 export interface BaseConfirmOptions<TContent> extends AsyncDialogOptions {
   /** Content factory that receives the confirm context. */
   content: TContent;
+  /** Fallback value when dialog is dismissed via ESC or backdrop click. @default false */
+  fallback?: boolean;
 }
 
 /**
@@ -125,10 +143,14 @@ export interface BaseAlertOptions<TContent> extends AsyncDialogOptions {
 /**
  * Generic base for choice dialog options.
  * @template TContent The content type (varies by adapter).
+ * @template K The type of keys for the available choices.
  */
-export interface BaseChoiceOptions<TContent> extends AsyncDialogOptions {
+export interface BaseChoiceOptions<TContent, K = unknown>
+  extends AsyncDialogOptions {
   /** Content factory that receives the choice context. */
   content: TContent;
+  /** Fallback value when dialog is dismissed via ESC or backdrop click. @default undefined */
+  fallback?: K;
 }
 
 /**

@@ -31,33 +31,39 @@ import type {
   DialogState,
   PromptContext,
 } from "./prompts";
-import {
-  DialogContainerRenderable,
-  type DialogRenderable,
-} from "./renderables";
+import { DialogContainerRenderable } from "./renderables";
 import type {
   BaseAlertOptions,
   BaseChoiceOptions,
   BaseConfirmOptions,
   BaseDialogActions,
   BasePromptOptions,
-  Dialog,
   DialogContainerOptions,
   DialogId,
   DialogShowOptions,
+  InternalDialog,
+  InternalDialogShowOptions,
 } from "./types";
 
-interface DialogWithJsx extends Dialog {
+interface DialogWithJsx extends InternalDialog {
   [JSX_CONTENT_KEY]?: ReactNode;
 }
 
 /** Internal type for show options that include JSX bridging keys */
-interface DialogShowOptionsWithJsx extends DialogShowOptions {
+interface DialogShowOptionsWithJsx extends InternalDialogShowOptions {
   [JSX_CONTENT_KEY]?: ReactNode;
 }
 
+/**
+ * Content factory that returns React elements.
+ * Must be a function to ensure consistent behavior with Solid adapter
+ * and prevent timing issues with JSX evaluation.
+ */
+export type ContentFactory = () => ReactNode;
+
 export interface ShowOptions extends Omit<DialogShowOptions, "content"> {
-  content: (() => ReactNode) | ReactNode;
+  /** Must be a function returning JSX: `() => <MyDialog />` */
+  content: ContentFactory;
 }
 
 // ============================================================================
@@ -75,7 +81,7 @@ type ConfirmContent = (ctx: ConfirmContext) => ReactNode;
 type AlertContent = (ctx: AlertContext) => ReactNode;
 
 /** Content factory for choice dialogs. */
-type ChoiceContent<K extends string> = (ctx: ChoiceContext<K>) => ReactNode;
+type ChoiceContent<K> = (ctx: ChoiceContext<K>) => ReactNode;
 
 /**
  * Options for a generic prompt dialog.
@@ -98,8 +104,8 @@ export interface AlertOptions extends BaseAlertOptions<AlertContent> {}
  * Options for a choice dialog.
  * @template K The type of keys for the available choices.
  */
-export interface ChoiceOptions<K extends string>
-  extends BaseChoiceOptions<ChoiceContent<K>> {}
+export interface ChoiceOptions<K>
+  extends BaseChoiceOptions<ChoiceContent<K>, K> {}
 
 /**
  * Dialog actions for showing, closing, and managing dialogs.
@@ -113,9 +119,7 @@ export interface DialogActions extends BaseDialogActions<ShowOptions> {
   /** Show an alert dialog and wait for the user to dismiss it. */
   alert: (options: AlertOptions) => Promise<void>;
   /** Show a choice dialog and wait for the user to select an option. */
-  choice: <K extends string>(
-    options: ChoiceOptions<K>,
-  ) => Promise<K | undefined>;
+  choice: <K>(options: ChoiceOptions<K>) => Promise<K | undefined>;
 }
 
 const DialogContext = createContext<DialogManager | null>(null);
@@ -127,12 +131,12 @@ const createPlaceholderContent = () => (ctx: RenderContext) =>
  * Helper to build dialog show options for React adapter.
  * Handles both direct show/replace calls and async prompt methods.
  *
- * @param content - ReactNode, () => ReactNode, or (ctx) => ReactNode
+ * @param content - () => ReactNode or (ctx) => ReactNode
  * @param rest - Dialog options excluding content
  * @param ctx - Optional context for async prompts (prompt, confirm, alert, choice)
  */
 function buildShowOptions(
-  content: ReactNode | (() => ReactNode),
+  content: ContentFactory,
   rest: Omit<DialogShowOptions, "content">,
 ): DialogShowOptionsWithJsx;
 function buildShowOptions<TCtx>(
@@ -141,22 +145,17 @@ function buildShowOptions<TCtx>(
   ctx: TCtx,
 ): DialogShowOptionsWithJsx;
 function buildShowOptions(
-  content: ReactNode | ((...args: unknown[]) => unknown),
+  content: (...args: unknown[]) => unknown,
   rest: Omit<DialogShowOptions, "content">,
   ctx?: unknown,
 ): DialogShowOptionsWithJsx {
-  const resolvedContent =
-    typeof content === "function"
-      ? ctx !== undefined
-        ? content(ctx)
-        : content()
-      : content;
+  const resolvedContent = ctx !== undefined ? content(ctx) : content();
 
   return {
     ...rest,
     content: createPlaceholderContent(),
-    deferred: true,
     [JSX_CONTENT_KEY]: resolvedContent,
+    deferred: true,
   } as DialogShowOptionsWithJsx;
 }
 
@@ -190,8 +189,8 @@ function useDialogManager(): DialogManager {
  * ```tsx
  * const dialog = useDialog();
  *
- * // Show a dialog
- * dialog.show({ content: <text>Hello</text> });
+ * // Show a dialog (content must be a function)
+ * dialog.show({ content: () => <text>Hello</text> });
  *
  * // Close the top dialog
  * dialog.close();
@@ -235,8 +234,11 @@ export function useDialog(): DialogActions {
       },
 
       confirm: (options: ConfirmOptions): Promise<boolean> => {
-        const { content, ...rest } = options;
-        return manager.confirm((ctx) => buildShowOptions(content, rest, ctx));
+        const { content, fallback, ...rest } = options;
+        return manager.confirm((ctx) => ({
+          ...buildShowOptions(content, rest, ctx),
+          fallback,
+        }));
       },
 
       alert: (options: AlertOptions): Promise<void> => {
@@ -244,11 +246,12 @@ export function useDialog(): DialogActions {
         return manager.alert((ctx) => buildShowOptions(content, rest, ctx));
       },
 
-      choice: <K extends string>(
-        options: ChoiceOptions<K>,
-      ): Promise<K | undefined> => {
-        const { content, ...rest } = options;
-        return manager.choice<K>((ctx) => buildShowOptions(content, rest, ctx));
+      choice: <K,>(options: ChoiceOptions<K>): Promise<K | undefined> => {
+        const { content, fallback, ...rest } = options;
+        return manager.choice<K>((ctx) => ({
+          ...buildShowOptions(content, rest, ctx),
+          fallback,
+        }));
       },
     }),
     [manager],
@@ -363,7 +366,7 @@ export function DialogProvider(props: DialogProviderProps) {
   useEffect(() => {
     renderer.root.add(container);
     return () => {
-      container.destroy();
+      container.destroyRecursively();
       renderer.root.remove(container.id);
       manager.destroy();
     };
@@ -384,12 +387,22 @@ export function DialogProvider(props: DialogProviderProps) {
     container.updateDimensions(dimensions.width);
   }, [container, dimensions.width]);
 
-  const { portals, deferredDialogs } = useMemo(() => {
+  useLayoutEffect(() => {
+    void storeVersion;
+
+    const dialogRenderables = container.getDialogRenderables();
+
+    for (const [, dialogRenderable] of dialogRenderables) {
+      // Set content box visible after React has injected portal content
+      dialogRenderable.contentBox.visible = true;
+    }
+  }, [storeVersion, container]);
+
+  const { portals } = useMemo(() => {
     // storeVersion is used to trigger recomputation when dialog state changes
     void storeVersion;
 
     const portals: ReactNode[] = [];
-    const deferredDialogs: DialogRenderable[] = [];
     const dialogRenderables = container.getDialogRenderables();
 
     for (const [id, dialogRenderable] of dialogRenderables) {
@@ -397,21 +410,12 @@ export function DialogProvider(props: DialogProviderProps) {
       const jsxContent = dialogWithJsx[JSX_CONTENT_KEY];
 
       if (jsxContent !== undefined) {
-        if (dialogWithJsx.deferred) {
-          deferredDialogs.push(dialogRenderable);
-        }
         portals.push(createPortal(jsxContent, dialogRenderable.contentBox, id));
       }
     }
 
-    return { portals, deferredDialogs };
+    return { portals };
   }, [container, storeVersion]);
-
-  useLayoutEffect(() => {
-    for (const dialogRenderable of deferredDialogs) {
-      dialogRenderable.reveal();
-    }
-  }, [deferredDialogs]);
 
   return (
     <DialogContext.Provider value={manager}>
@@ -434,7 +438,6 @@ export type {
 } from "./prompts";
 export { type DialogTheme, themes } from "./themes";
 export type {
-  DialogBackdropMode,
   DialogContainerOptions,
   DialogId,
   DialogSize,

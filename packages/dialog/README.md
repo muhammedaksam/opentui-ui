@@ -20,7 +20,6 @@
 - Dialog stack support (multiple dialogs)
 - Focus management (saves/restores focus on open/close)
 - Theme presets (minimal, unstyled)
-- Backdrop stacking modes (prevent compounded dimming)
 - React and Solid.js integrations
 
 ## Table of Contents
@@ -43,7 +42,6 @@
 - [Customization](#customization)
   - [Default Styling](#default-styling)
   - [Themes](#themes)
-  - [Backdrop Modes](#backdrop-modes)
   - [Unstyled Mode](#unstyled-mode)
   - [Size Presets](#size-presets)
 - [TypeScript](#typescript)
@@ -132,14 +130,14 @@ import { BoxRenderable, TextRenderable } from "@opentui/core";
 
 // Confirmation dialog - returns boolean
 const confirmed = await manager.confirm({
-  content: (renderCtx, { resolve }) => {
+  content: (renderCtx, { resolve, dismiss }) => {
     const box = new BoxRenderable(renderCtx, { flexDirection: "column" });
     const title = new TextRenderable(renderCtx, { content: "Delete file?" });
     box.add(title);
 
     const buttons = new BoxRenderable(renderCtx, { flexDirection: "row" });
     const cancelBtn = new TextRenderable(renderCtx, { content: "Cancel" });
-    cancelBtn.on("mouseUp", () => resolve(false));
+    cancelBtn.on("mouseUp", dismiss);
     const confirmBtn = new TextRenderable(renderCtx, { content: "Confirm" });
     confirmBtn.on("mouseUp", () => resolve(true));
     buttons.add(cancelBtn);
@@ -148,6 +146,7 @@ const confirmed = await manager.confirm({
 
     return box;
   },
+  fallback: false, // Optional: value when dismissed via ESC/backdrop (default: false)
 });
 
 // Alert dialog - returns void
@@ -170,6 +169,7 @@ const action = await manager.choice<"save" | "discard">({
     // ... build UI
     return box;
   },
+  fallback: "discard", // Optional: value when dismissed via ESC/backdrop
 });
 
 // Generic prompt - returns typed value or undefined
@@ -187,7 +187,7 @@ const value = await manager.prompt<string>({
 
 | Method | Returns | Context Properties | Notes |
 | ------ | ------- | ------------------ | ----- |
-| `confirm()` | `Promise<boolean>` | `resolve(boolean)`, `dialogId` | `resolve(true)` = confirm, `resolve(false)` = cancel |
+| `confirm()` | `Promise<boolean>` | `resolve(boolean)`, `dismiss()`, `dialogId` | `resolve(true)` = confirm, `dismiss()` = cancel |
 | `alert()` | `Promise<void>` | `dismiss()`, `dialogId` | Just acknowledge and close |
 | `choice<K>()` | `Promise<K \| undefined>` | `resolve(key)`, `dismiss()`, `dialogId` | `dismiss()` returns `undefined` |
 | `prompt<T>()` | `Promise<T \| undefined>` | `resolve(value)`, `dismiss()`, `dialogId` | `dismiss()` returns `undefined` |
@@ -212,7 +212,9 @@ const id = manager.show({
   size?: "small" | "medium" | "large" | "full",
   style?: DialogStyle,
   unstyled?: boolean,
-  backdropMode?: "per-dialog" | "top-only",
+  backdropColor?: string, // default: "#000000"
+  backdropOpacity?: number | string, // 0-1 or "50%" (default: 0.35)
+  closeOnEscape?: boolean, // default: true (per-dialog override)
   closeOnClickOutside?: boolean, // default: false
   onClose?: () => void,
   onOpen?: () => void,
@@ -253,10 +255,8 @@ const container = new DialogContainerRenderable(renderer, {
   manager, // Required: DialogManager instance
   size: "medium", // Default size preset
   dialogOptions: {
-    // Default options for all dialogs
+    // Default style options for all dialogs
     style: DialogStyle,
-    unstyled: boolean,
-    backdropMode: "per-dialog" | "top-only",
   },
   sizePresets: {
     // Custom size presets (terminal columns)
@@ -264,9 +264,11 @@ const container = new DialogContainerRenderable(renderer, {
     medium: 60,
     large: 80,
   },
+  backdropColor: "#000000", // Default backdrop color
+  backdropOpacity: 0.35, // 0-1 or "50%" (default: 0.35)
   closeOnEscape: true, // ESC key closes top dialog (default: true)
+  closeOnClickOutside: false, // Backdrop click closes top dialog (default: false)
   unstyled: false, // Disable default styles (default: false)
-  backdropMode: "top-only", // Backdrop stacking behavior (default)
 });
 
 // Add to render tree
@@ -277,10 +279,6 @@ renderer.root.add(container);
 
 ```typescript
 interface DialogStyle {
-  // Backdrop
-  backdropColor?: string; // Default: "#000000"
-  backdropOpacity?: number | string; // 0-1, or "50%" (default: 0.35)
-
   // Content panel
   backgroundColor?: string; // Default: "#262626"
   borderColor?: string;
@@ -377,11 +375,12 @@ const confirmed = await dialog.confirm({
     <box flexDirection="column">
       <text>Delete this file?</text>
       <box flexDirection="row" gap={1}>
-        <text onMouseUp={() => ctx.resolve(false)}>Cancel</text>
+        <text onMouseUp={ctx.dismiss}>Cancel</text>
         <text onMouseUp={() => ctx.resolve(true)}>Confirm</text>
       </box>
     </box>
   ),
+  fallback: false, // Optional: value when dismissed via ESC/backdrop (default: false)
 });
 
 // Alert dialog - returns void (just acknowledgment)
@@ -404,6 +403,7 @@ const action = await dialog.choice<"save" | "discard">({
       <text onMouseUp={ctx.dismiss}>Cancel</text>
     </box>
   ),
+  fallback: "discard", // Optional: value when dismissed via ESC/backdrop
 });
 
 // Generic prompt - returns typed value or undefined
@@ -449,14 +449,15 @@ Returns dialog actions for imperatively controlling dialogs.
 ```tsx
 const dialog = useDialog();
 
-// Show a dialog
+// Show a dialog (content must be a function for both React and Solid)
 dialog.show({
-  content: <MyContent />,        // React: JSX directly
-  content: () => <MyContent />,  // Solid: function returning JSX
+  content: () => <MyContent />,
   size: "medium",
   style: { backgroundColor: "#1a1a1a" },
   unstyled: false,
-  backdropMode: "top-only",
+  backdropColor: "#000000",
+  backdropOpacity: 0.5,
+  closeOnEscape: true,
   closeOnClickOutside: true,
   onClose: () => {},
   onOpen: () => {},
@@ -584,7 +585,7 @@ function MyDialog({ resolve, dialogId }: ConfirmContext) {
 ### Full Example
 
 ```tsx
-// React
+// React (content must be a function)
 function MyContent() {
   const dialog = useDialog();
   const isOpen = useDialogState((s) => s.isOpen);
@@ -592,7 +593,7 @@ function MyContent() {
   return (
     <box>
       <text>{isOpen ? "Dialog open" : "No dialog"}</text>
-      <box onMouseUp={() => dialog.show({ content: <text>Hello!</text> })}>
+      <box onMouseUp={() => dialog.show({ content: () => <text>Hello!</text> })}>
         <text>Open Dialog</text>
       </box>
     </box>
@@ -630,7 +631,6 @@ Out of the box, dialogs use the **minimal** theme:
 - Lighter backdrop (35% opacity)
 - No borders
 - Tighter padding (1 cell all around)
-- `top-only` backdrop mode (only topmost dialog shows backdrop)
 
 This provides a clean, unobtrusive appearance while still being usable immediately.
 
@@ -662,22 +662,6 @@ const container = new DialogContainerRenderable(renderer, {
   size: "large", // Override specific options
 });
 ```
-
-### Backdrop Modes
-
-When stacking multiple dialogs, backdrops can compound and make the screen too dark. Use `backdropMode` to control this:
-
-```ts
-const container = new DialogContainerRenderable(renderer, {
-  manager,
-  backdropMode: "per-dialog", // Each dialog renders its own backdrop
-});
-```
-
-| Mode | Description |
-| ---- | ----------- |
-| `top-only` | Only the topmost dialog renders a backdrop (default) |
-| `per-dialog` | Each dialog renders its own backdrop |
 
 ### Unstyled Mode
 
@@ -729,15 +713,13 @@ const container = new DialogContainerRenderable(renderer, {
 Full TypeScript support with exported types:
 
 ```ts
+// Core types
 import type {
-  ComputedDialogStyle,
-  ComputeDialogStyleInput,
+  // Dialog types
   Dialog,
-  DialogBackdropMode,
   DialogContainerOptions,
   DialogContentFactory,
   DialogId,
-  DialogOptions,
   DialogShowOptions,
   DialogSize,
   DialogState,
@@ -749,13 +731,26 @@ import type {
   ChoiceContext,
   ConfirmContext,
   PromptContext,
+  // Async dialog options (for imperative usage)
+  AlertOptions,
+  ChoiceOptions,
+  ConfirmOptions,
+  PromptOptions,
+  // Base types (for building custom adapters)
+  AsyncDialogOptions,
+  BaseAlertOptions,
+  BaseChoiceOptions,
+  BaseConfirmOptions,
+  BaseDialogActions,
+  BasePromptOptions,
 } from "@opentui-ui/dialog";
 
-// Type guard
+// Type guard for close events
 import { isDialogToClose } from "@opentui-ui/dialog";
 
 // Themes and default style constants
 import {
+  DEFAULT_BACKDROP_COLOR,
   DEFAULT_BACKDROP_OPACITY,
   DEFAULT_PADDING,
   DEFAULT_STYLE,
