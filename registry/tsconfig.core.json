@@ -37,6 +37,7 @@
       "tooltip",
       "hover-card",
       "sheet",
+      "drawer",
       "theme",
       "toggle",
       "toggle-group"
