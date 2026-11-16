@@ -99,6 +99,7 @@ const recipes = [
   "spinner",
   "table",
   "breadcrumb",
+  "aspect-ratio",
 ];
 const catalogRecipes = [
   "accordion",
@@ -126,6 +127,7 @@ const catalogRecipes = [
   "spinner",
   "table",
   "breadcrumb",
+  "aspect-ratio",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -136,6 +138,7 @@ const primitivelessRecipes = [
   "skeleton",
   "table",
   "breadcrumb",
+  "aspect-ratio",
 ];
 const themePresets = [
   {
