@@ -30,6 +30,7 @@
       "avatar",
       "input-group",
       "scroll-area",
+      "field",
       "theme",
       "toggle",
       "toggle-group"

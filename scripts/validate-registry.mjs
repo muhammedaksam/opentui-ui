@@ -104,6 +104,7 @@ const recipes = [
   "avatar",
   "input-group",
   "scroll-area",
+  "field",
 ];
 const catalogRecipes = [
   "accordion",
@@ -136,6 +137,7 @@ const catalogRecipes = [
   "avatar",
   "input-group",
   "scroll-area",
+  "field",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -151,6 +153,7 @@ const primitivelessRecipes = [
   "avatar",
   "input-group",
   "scroll-area",
+  "field",
 ];
 const themePresets = [
   {
