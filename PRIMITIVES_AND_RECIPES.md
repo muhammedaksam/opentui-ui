@@ -733,6 +733,18 @@ Reference implementations:
 - `registry/field/react.tsx`
 - `registry/field/solid.tsx`
 
+## Pagination Recipe
+
+Pagination is a consumer-owned, presentational navigation recipe inspired by
+shadcn-ui. It provides structured links, previous/next controls, and ellipsis
+indicators for paging through tabular or multi-view application data.
+
+Reference implementations:
+
+- `registry/pagination/core.ts`
+- `registry/pagination/react.tsx`
+- `registry/pagination/solid.tsx`
+
 ## Distribution
 
 A shadcn-like OpenTUI experience requires a registry that copies

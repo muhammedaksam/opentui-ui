@@ -21,6 +21,7 @@ export default defineMeta({
     "radio-group",
     "dialog",
     "badge",
+    "pagination",
     "field",
     "scroll-area",
     "input-group",

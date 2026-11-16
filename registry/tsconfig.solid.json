@@ -33,6 +33,7 @@
       "input-group",
       "scroll-area",
       "field",
+      "pagination",
       "theme",
       "toggle",
       "toggle-group",
