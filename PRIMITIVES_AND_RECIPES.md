@@ -845,6 +845,18 @@ Reference implementations:
 - `registry/command/react.tsx`
 - `registry/command/solid.tsx`
 
+## Combobox Recipe
+
+Combobox pairs a select trigger button with a searchable dropdown popup.
+Built directly from OpenTUI Box and Text elements and theme tokens, it enables
+autocomplete selection, search filtering, and checkmark indicators for options.
+
+Reference implementations:
+
+- `registry/combobox/core.ts`
+- `registry/combobox/react.tsx`
+- `registry/combobox/solid.tsx`
+
 ## Distribution
 
 A shadcn-like OpenTUI experience requires a registry that copies

@@ -114,6 +114,7 @@ const recipes = [
   "drawer",
   "resizable",
   "command",
+  "combobox",
 ];
 const catalogRecipes = [
   "accordion",
@@ -156,6 +157,7 @@ const catalogRecipes = [
   "drawer",
   "resizable",
   "command",
+  "combobox",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -181,6 +183,7 @@ const primitivelessRecipes = [
   "drawer",
   "resizable",
   "command",
+  "combobox",
 ];
 const themePresets = [
   {

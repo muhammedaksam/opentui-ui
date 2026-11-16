@@ -40,6 +40,7 @@
       "drawer",
       "resizable",
       "command",
+      "combobox",
       "theme",
       "toggle",
       "toggle-group"
