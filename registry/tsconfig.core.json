@@ -35,6 +35,7 @@
       "input-otp",
       "select",
       "tooltip",
+      "hover-card",
       "theme",
       "toggle",
       "toggle-group"
