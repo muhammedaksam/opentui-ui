@@ -47,6 +47,7 @@
       "diff-viewer",
       "markdown-viewer",
       "ascii-banner",
+      "terminal-view",
       "theme",
       "toggle",
       "toggle-group"

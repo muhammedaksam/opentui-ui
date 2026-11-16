@@ -121,6 +121,7 @@ const recipes = [
   "diff-viewer",
   "markdown-viewer",
   "ascii-banner",
+  "terminal-view",
 ];
 const catalogRecipes = [
   "accordion",
@@ -170,6 +171,7 @@ const catalogRecipes = [
   "diff-viewer",
   "markdown-viewer",
   "ascii-banner",
+  "terminal-view",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -202,6 +204,7 @@ const primitivelessRecipes = [
   "diff-viewer",
   "markdown-viewer",
   "ascii-banner",
+  "terminal-view",
 ];
 const themePresets = [
   {
