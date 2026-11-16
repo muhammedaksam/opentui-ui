@@ -106,6 +106,7 @@ const recipes = [
   "scroll-area",
   "field",
   "pagination",
+  "input-otp",
 ];
 const catalogRecipes = [
   "accordion",
@@ -140,6 +141,7 @@ const catalogRecipes = [
   "scroll-area",
   "field",
   "pagination",
+  "input-otp",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -157,6 +159,7 @@ const primitivelessRecipes = [
   "scroll-area",
   "field",
   "pagination",
+  "input-otp",
 ];
 const themePresets = [
   {

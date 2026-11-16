@@ -34,6 +34,7 @@
       "scroll-area",
       "field",
       "pagination",
+      "input-otp",
       "theme",
       "toggle",
       "toggle-group",
