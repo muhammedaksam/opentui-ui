@@ -547,6 +547,22 @@ Reference implementations:
 - `registry/kbd/react.tsx`
 - `registry/kbd/solid.tsx`
 
+## Skeleton Recipe
+
+Skeleton has no reusable interaction, state, focus, keyboard, pointer, collection,
+overlay, or lifecycle behavior. It is therefore not a primitive and has no
+`@tuiparts/core`, React, or Solid package export.
+
+Editable Core, React, and Solid Skeleton recipes are built directly from ordinary
+OpenTUI Box nodes. They provide placeholder boxes with semantic surface background
+and fill enabled.
+
+Reference implementations:
+
+- `registry/skeleton/core.ts`
+- `registry/skeleton/react.tsx`
+- `registry/skeleton/solid.tsx`
+
 ## Distribution
 
 A shadcn-like OpenTUI experience requires a registry that copies
