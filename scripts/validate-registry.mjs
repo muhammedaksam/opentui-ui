@@ -113,6 +113,7 @@ const recipes = [
   "sheet",
   "drawer",
   "resizable",
+  "command",
 ];
 const catalogRecipes = [
   "accordion",
@@ -154,6 +155,7 @@ const catalogRecipes = [
   "sheet",
   "drawer",
   "resizable",
+  "command",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -178,6 +180,7 @@ const primitivelessRecipes = [
   "sheet",
   "drawer",
   "resizable",
+  "command",
 ];
 const themePresets = [
   {

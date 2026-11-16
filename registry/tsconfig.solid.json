@@ -41,6 +41,7 @@
       "sheet",
       "drawer",
       "resizable",
+      "command",
       "theme",
       "toggle",
       "toggle-group",
