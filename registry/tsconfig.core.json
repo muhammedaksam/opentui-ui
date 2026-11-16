@@ -28,6 +28,7 @@
       "aspect-ratio",
       "empty",
       "avatar",
+      "input-group",
       "theme",
       "toggle",
       "toggle-group"

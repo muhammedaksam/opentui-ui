@@ -102,6 +102,7 @@ const recipes = [
   "aspect-ratio",
   "empty",
   "avatar",
+  "input-group",
 ];
 const catalogRecipes = [
   "accordion",
@@ -132,6 +133,7 @@ const catalogRecipes = [
   "aspect-ratio",
   "empty",
   "avatar",
+  "input-group",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -145,6 +147,7 @@ const primitivelessRecipes = [
   "aspect-ratio",
   "empty",
   "avatar",
+  "input-group",
 ];
 const themePresets = [
   {
