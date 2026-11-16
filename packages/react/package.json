@@ -45,7 +45,8 @@
     "./tabs": "./src/tabs/index.ts",
     "./textarea": "./src/textarea/index.tsx",
     "./toggle": "./src/toggle/index.tsx",
-    "./toggle-group": "./src/toggle-group/index.tsx"
+    "./toggle-group": "./src/toggle-group/index.tsx",
+    "./progress": "./src/progress/index.ts"
   },
   "publishConfig": {
     "main": "./dist/index.mjs",
@@ -118,6 +119,10 @@
       "./toggle-group": {
         "types": "./dist/toggle-group/index.d.mts",
         "import": "./dist/toggle-group/index.mjs"
+      },
+      "./progress": {
+        "types": "./dist/progress/index.d.mts",
+        "import": "./dist/progress/index.mjs"
       }
     }
   },

@@ -95,6 +95,7 @@ const recipes = [
   "separator",
   "kbd",
   "skeleton",
+  "progress",
 ];
 const catalogRecipes = [
   "accordion",
@@ -118,6 +119,7 @@ const catalogRecipes = [
   "separator",
   "kbd",
   "skeleton",
+  "progress",
 ];
 const primitivelessRecipes = [
   "badge",
