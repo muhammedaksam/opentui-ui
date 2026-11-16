@@ -21,6 +21,7 @@
       "textarea",
       "card",
       "separator",
+      "kbd",
       "theme",
       "toggle",
       "toggle-group",
