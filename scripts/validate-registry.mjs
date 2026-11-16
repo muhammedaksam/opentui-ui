@@ -112,6 +112,7 @@ const recipes = [
   "hover-card",
   "sheet",
   "drawer",
+  "resizable",
 ];
 const catalogRecipes = [
   "accordion",
@@ -152,6 +153,7 @@ const catalogRecipes = [
   "hover-card",
   "sheet",
   "drawer",
+  "resizable",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -175,6 +177,7 @@ const primitivelessRecipes = [
   "hover-card",
   "sheet",
   "drawer",
+  "resizable",
 ];
 const themePresets = [
   {

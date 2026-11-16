@@ -38,6 +38,7 @@
       "hover-card",
       "sheet",
       "drawer",
+      "resizable",
       "theme",
       "toggle",
       "toggle-group"
