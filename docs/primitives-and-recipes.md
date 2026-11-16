@@ -139,6 +139,7 @@ The starter catalog provides `core/*`, `react/*`, and `solid/*` items for:
 - Badge
 - Toggle
 - ToggleGroup
+- markdown-viewer
 - diff-viewer
 - menubar
 - context-menu

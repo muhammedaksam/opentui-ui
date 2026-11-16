@@ -119,6 +119,7 @@ const recipes = [
   "context-menu",
   "menubar",
   "diff-viewer",
+  "markdown-viewer",
 ];
 const catalogRecipes = [
   "accordion",
@@ -166,6 +167,7 @@ const catalogRecipes = [
   "context-menu",
   "menubar",
   "diff-viewer",
+  "markdown-viewer",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -196,6 +198,7 @@ const primitivelessRecipes = [
   "context-menu",
   "menubar",
   "diff-viewer",
+  "markdown-viewer",
 ];
 const themePresets = [
   {
