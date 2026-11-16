@@ -100,6 +100,7 @@ const recipes = [
   "table",
   "breadcrumb",
   "aspect-ratio",
+  "empty",
 ];
 const catalogRecipes = [
   "accordion",
@@ -128,6 +129,7 @@ const catalogRecipes = [
   "table",
   "breadcrumb",
   "aspect-ratio",
+  "empty",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -139,6 +141,7 @@ const primitivelessRecipes = [
   "table",
   "breadcrumb",
   "aspect-ratio",
+  "empty",
 ];
 const themePresets = [
   {
