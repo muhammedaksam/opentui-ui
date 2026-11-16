@@ -24,6 +24,7 @@
       "progress",
       "spinner",
       "table",
+      "breadcrumb",
       "theme",
       "toggle",
       "toggle-group"

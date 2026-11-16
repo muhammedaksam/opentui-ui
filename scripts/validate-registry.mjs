@@ -98,6 +98,7 @@ const recipes = [
   "progress",
   "spinner",
   "table",
+  "breadcrumb",
 ];
 const catalogRecipes = [
   "accordion",
@@ -124,6 +125,7 @@ const catalogRecipes = [
   "progress",
   "spinner",
   "table",
+  "breadcrumb",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -133,6 +135,7 @@ const primitivelessRecipes = [
   "kbd",
   "skeleton",
   "table",
+  "breadcrumb",
 ];
 const themePresets = [
   {

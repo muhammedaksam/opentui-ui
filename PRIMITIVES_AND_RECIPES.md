@@ -627,6 +627,23 @@ Reference implementations:
 - `registry/table/react.tsx`
 - `registry/table/solid.tsx`
 
+## Breadcrumb Recipe
+
+Breadcrumb has no reusable interaction, state, focus, keyboard, pointer, collection,
+overlay, or lifecycle behavior. It is therefore not a primitive and has no
+`@tuiparts/core`, React, or Solid package export.
+
+Editable Core, React, and Solid Breadcrumb recipes are built directly from ordinary
+OpenTUI Box and Text nodes. They provide compound navigation trail parts (`Breadcrumb`,
+`BreadcrumbList`, `BreadcrumbItem`, `BreadcrumbLink`, `BreadcrumbPage`, `BreadcrumbSeparator`,
+`BreadcrumbEllipsis`) with theme-reactive styling.
+
+Reference implementations:
+
+- `registry/breadcrumb/core.ts`
+- `registry/breadcrumb/react.tsx`
+- `registry/breadcrumb/solid.tsx`
+
 ## Distribution
 
 A shadcn-like OpenTUI experience requires a registry that copies

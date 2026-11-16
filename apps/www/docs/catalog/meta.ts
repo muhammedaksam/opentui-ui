@@ -21,6 +21,7 @@ export default defineMeta({
     "radio-group",
     "dialog",
     "badge",
+    "breadcrumb",
     "table",
     "spinner",
     "progress",
