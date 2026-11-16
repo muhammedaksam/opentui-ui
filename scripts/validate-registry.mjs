@@ -97,6 +97,7 @@ const recipes = [
   "skeleton",
   "progress",
   "spinner",
+  "table",
 ];
 const catalogRecipes = [
   "accordion",
@@ -122,6 +123,7 @@ const catalogRecipes = [
   "skeleton",
   "progress",
   "spinner",
+  "table",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -130,6 +132,7 @@ const primitivelessRecipes = [
   "separator",
   "kbd",
   "skeleton",
+  "table",
 ];
 const themePresets = [
   {
