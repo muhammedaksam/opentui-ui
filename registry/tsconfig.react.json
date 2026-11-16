@@ -56,7 +56,5 @@
       "shims/react"
     ]
   },
-  "include": [
-    "*/react.tsx"
-  ]
+  "include": ["*/react.tsx"]
 }

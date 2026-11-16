@@ -53,9 +53,5 @@
       "toggle-group"
     ]
   },
-  "include": [
-    "*/core.ts",
-    "theme/theme.ts",
-    "theme/themes/*.ts"
-  ]
+  "include": ["*/core.ts", "theme/theme.ts", "theme/themes/*.ts"]
 }

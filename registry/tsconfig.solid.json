@@ -56,7 +56,5 @@
       "shims/solid"
     ]
   },
-  "include": [
-    "*/solid.tsx"
-  ]
+  "include": ["*/solid.tsx"]
 }
