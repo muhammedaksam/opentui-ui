@@ -139,6 +139,7 @@ The starter catalog provides `core/*`, `react/*`, and `solid/*` items for:
 - Badge
 - Toggle
 - ToggleGroup
+- tooltip
 - select
 - input-otp
 - pagination

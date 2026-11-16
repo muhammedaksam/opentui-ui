@@ -108,6 +108,7 @@ const recipes = [
   "pagination",
   "input-otp",
   "select",
+  "tooltip",
 ];
 const catalogRecipes = [
   "accordion",
@@ -144,6 +145,7 @@ const catalogRecipes = [
   "pagination",
   "input-otp",
   "select",
+  "tooltip",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -163,6 +165,7 @@ const primitivelessRecipes = [
   "pagination",
   "input-otp",
   "select",
+  "tooltip",
 ];
 const themePresets = [
   {
