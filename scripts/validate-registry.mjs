@@ -116,6 +116,7 @@ const recipes = [
   "command",
   "combobox",
   "dropdown-menu",
+  "context-menu",
 ];
 const catalogRecipes = [
   "accordion",
@@ -160,6 +161,7 @@ const catalogRecipes = [
   "command",
   "combobox",
   "dropdown-menu",
+  "context-menu",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -187,6 +189,7 @@ const primitivelessRecipes = [
   "command",
   "combobox",
   "dropdown-menu",
+  "context-menu",
 ];
 const themePresets = [
   {

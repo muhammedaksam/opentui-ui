@@ -42,6 +42,7 @@
       "command",
       "combobox",
       "dropdown-menu",
+      "context-menu",
       "theme",
       "toggle",
       "toggle-group"
