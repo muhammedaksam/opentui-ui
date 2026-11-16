@@ -33,6 +33,7 @@
       "field",
       "pagination",
       "input-otp",
+      "select",
       "theme",
       "toggle",
       "toggle-group"

@@ -107,6 +107,7 @@ const recipes = [
   "field",
   "pagination",
   "input-otp",
+  "select",
 ];
 const catalogRecipes = [
   "accordion",
@@ -142,6 +143,7 @@ const catalogRecipes = [
   "field",
   "pagination",
   "input-otp",
+  "select",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -160,6 +162,7 @@ const primitivelessRecipes = [
   "field",
   "pagination",
   "input-otp",
+  "select",
 ];
 const themePresets = [
   {
