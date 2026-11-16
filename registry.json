@@ -8,7 +8,9 @@
       "type": "registry:item",
       "title": "Accordion (Core)",
       "description": "Editable imperative Accordion Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/accordion/core.ts",
@@ -22,14 +24,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/accordion",
       "type": "registry:item",
       "title": "Accordion (React)",
       "description": "Editable React Accordion Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/accordion/react.tsx",
@@ -43,14 +49,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/accordion",
       "type": "registry:item",
       "title": "Accordion (Solid)",
       "description": "Editable Solid Accordion Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/accordion/solid.tsx",
@@ -64,14 +74,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/checkbox-group",
       "type": "registry:item",
       "title": "Checkbox Group (Core)",
       "description": "Editable imperative CheckboxGroup Recipe built on the tuiparts.sh packaged Primitives.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/checkbox-group/core.ts",
@@ -85,14 +99,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/checkbox-group",
       "type": "registry:item",
       "title": "Checkbox Group (React)",
       "description": "Editable React CheckboxGroup Recipe built on the tuiparts.sh packaged Primitives.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/checkbox-group/react.tsx",
@@ -106,14 +124,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/checkbox-group",
       "type": "registry:item",
       "title": "Checkbox Group (Solid)",
       "description": "Editable Solid CheckboxGroup Recipe built on the tuiparts.sh packaged Primitives.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/checkbox-group/solid.tsx",
@@ -127,14 +149,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/checkbox",
       "type": "registry:item",
       "title": "Checkbox (Core)",
       "description": "Editable imperative Checkbox recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/checkbox/core.ts",
@@ -148,14 +174,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/checkbox",
       "type": "registry:item",
       "title": "Checkbox (React)",
       "description": "Editable React Checkbox recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/checkbox/react.tsx",
@@ -169,14 +199,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/checkbox",
       "type": "registry:item",
       "title": "Checkbox (Solid)",
       "description": "Editable Solid Checkbox recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/checkbox/solid.tsx",
@@ -190,14 +224,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/switch",
       "type": "registry:item",
       "title": "Switch (Core)",
       "description": "Editable imperative Switch recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/switch/core.ts",
@@ -211,14 +249,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/switch",
       "type": "registry:item",
       "title": "Switch (React)",
       "description": "Editable React Switch recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/switch/react.tsx",
@@ -232,14 +274,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/switch",
       "type": "registry:item",
       "title": "Switch (Solid)",
       "description": "Editable Solid Switch recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/switch/solid.tsx",
@@ -253,14 +299,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/button",
       "type": "registry:item",
       "title": "Button (Core)",
       "description": "Editable imperative Button recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/button/core.ts",
@@ -274,14 +324,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/button",
       "type": "registry:item",
       "title": "Button (React)",
       "description": "Editable React Button recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/button/react.tsx",
@@ -295,14 +349,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/button",
       "type": "registry:item",
       "title": "Button (Solid)",
       "description": "Editable Solid Button recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/button/solid.tsx",
@@ -316,7 +374,9 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/badge",
@@ -337,7 +397,9 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/badge",
@@ -358,7 +420,9 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/badge",
@@ -379,77 +443,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
-    },
-    {
-      "name": "core/card",
-      "type": "registry:item",
-      "title": "Card (Core)",
-      "description": "Editable imperative Card recipe built directly from OpenTUI Renderables.",
-      "dependencies": [],
-      "files": [
-        {
-          "path": "registry/card/core.ts",
-          "type": "registry:file",
-          "target": "components/ui/card.ts"
-        }
-      ],
-      "meta": {
-        "framework": "core",
-        "primitiveStatus": "recipe",
-        "sourceOwnership": "consumer",
-        "updateStrategy": "shadcn-add"
-      },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
-    },
-    {
-      "name": "react/card",
-      "type": "registry:item",
-      "title": "Card (React)",
-      "description": "Editable React Card recipe built directly from OpenTUI elements.",
-      "dependencies": [],
-      "files": [
-        {
-          "path": "registry/card/react.tsx",
-          "type": "registry:file",
-          "target": "components/ui/card.tsx"
-        }
-      ],
-      "meta": {
-        "framework": "react",
-        "primitiveStatus": "recipe",
-        "sourceOwnership": "consumer",
-        "updateStrategy": "shadcn-add"
-      },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
-    },
-    {
-      "name": "solid/card",
-      "type": "registry:item",
-      "title": "Card (Solid)",
-      "description": "Editable Solid Card recipe built directly from OpenTUI elements.",
-      "dependencies": [],
-      "files": [
-        {
-          "path": "registry/card/solid.tsx",
-          "type": "registry:file",
-          "target": "components/ui/card.tsx"
-        }
-      ],
-      "meta": {
-        "framework": "solid",
-        "primitiveStatus": "recipe",
-        "sourceOwnership": "consumer",
-        "updateStrategy": "shadcn-add"
-      },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/radio-group",
       "type": "registry:item",
       "title": "Radio Group (Core)",
       "description": "Editable imperative Radio and Radio Group recipe built on the tuiparts.sh collection Primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/radio-group/core.ts",
@@ -463,14 +468,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/radio-group",
       "type": "registry:item",
       "title": "Radio Group (React)",
       "description": "Editable React Radio and Radio Group recipe built on the tuiparts.sh collection Primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/radio-group/react.tsx",
@@ -484,14 +493,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/radio-group",
       "type": "registry:item",
       "title": "Radio Group (Solid)",
       "description": "Editable Solid Radio and Radio Group recipe built on the tuiparts.sh collection Primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/radio-group/solid.tsx",
@@ -505,14 +518,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/number-field",
       "type": "registry:item",
       "title": "Number Field (Core)",
       "description": "Editable imperative NumberField Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/number-field/core.ts",
@@ -526,14 +543,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/number-field",
       "type": "registry:item",
       "title": "Number Field (React)",
       "description": "Editable React NumberField Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/number-field/react.tsx",
@@ -547,14 +568,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/number-field",
       "type": "registry:item",
       "title": "Number Field (Solid)",
       "description": "Editable Solid NumberField Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/number-field/solid.tsx",
@@ -568,14 +593,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/slider",
       "type": "registry:item",
       "title": "Slider (Core)",
       "description": "Editable imperative Slider Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/slider/core.ts",
@@ -589,14 +618,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/slider",
       "type": "registry:item",
       "title": "Slider (React)",
       "description": "Editable React Slider Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/slider/react.tsx",
@@ -610,14 +643,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/slider",
       "type": "registry:item",
       "title": "Slider (Solid)",
       "description": "Editable Solid Slider Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/slider/solid.tsx",
@@ -631,14 +668,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/input",
       "type": "registry:item",
       "title": "Input (Core)",
       "description": "Editable imperative Input recipe preserving OpenTUI-native editing and events.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "docs": "Input preserves OpenTUI's native mutable buffer: changed programmatic value assignments invoke onInput, while onChange reports blur or submit commits.",
       "files": [
         {
@@ -653,14 +694,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/input",
       "type": "registry:item",
       "title": "Input (React)",
       "description": "Editable React Input recipe preserving OpenTUI-native editing and events.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "docs": "Input preserves OpenTUI's native mutable buffer: changed programmatic value assignments invoke onInput, while onChange reports blur or submit commits.",
       "files": [
         {
@@ -675,14 +720,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/input",
       "type": "registry:item",
       "title": "Input (Solid)",
       "description": "Editable Solid Input recipe preserving OpenTUI-native editing and events.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "docs": "Input preserves OpenTUI's native mutable buffer: changed programmatic value assignments invoke onInput, while onChange reports blur or submit commits.",
       "files": [
         {
@@ -697,14 +746,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/textarea",
       "type": "registry:item",
       "title": "Textarea (Core)",
       "description": "Editable imperative Textarea recipe preserving OpenTUI-native multiline editing.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "docs": "Textarea preserves OpenTUI's native EditBuffer, initialValue semantics, editing operations, and callback order while adding disabled interaction gating.",
       "files": [
         {
@@ -719,14 +772,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/textarea",
       "type": "registry:item",
       "title": "Textarea (React)",
       "description": "Editable React Textarea recipe preserving OpenTUI-native multiline editing.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "docs": "Textarea preserves OpenTUI's native EditBuffer, initialValue semantics, editing operations, and callback order while adding disabled interaction gating.",
       "files": [
         {
@@ -741,14 +798,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/textarea",
       "type": "registry:item",
       "title": "Textarea (Solid)",
       "description": "Editable Solid Textarea recipe preserving OpenTUI-native multiline editing.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "docs": "Textarea preserves OpenTUI's native EditBuffer, initialValue semantics, editing operations, and callback order while adding disabled interaction gating.",
       "files": [
         {
@@ -763,14 +824,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/dialog",
       "type": "registry:item",
       "title": "Dialog (Core)",
       "description": "Editable imperative Dialog recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/dialog/core.ts",
@@ -784,14 +849,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/dialog",
       "type": "registry:item",
       "title": "Dialog (React)",
       "description": "Editable React Dialog recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/dialog/react.tsx",
@@ -805,14 +874,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/dialog",
       "type": "registry:item",
       "title": "Dialog (Solid)",
       "description": "Editable Solid Dialog recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/dialog/solid.tsx",
@@ -826,14 +899,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/toggle",
       "type": "registry:item",
       "title": "Toggle (Core)",
       "description": "Editable imperative Toggle recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/toggle/core.ts",
@@ -847,14 +924,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/toggle",
       "type": "registry:item",
       "title": "Toggle (React)",
       "description": "Editable React Toggle recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/toggle/react.tsx",
@@ -868,14 +949,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/toggle",
       "type": "registry:item",
       "title": "Toggle (Solid)",
       "description": "Editable Solid Toggle recipe built on the tuiparts.sh packaged primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/toggle/solid.tsx",
@@ -889,14 +974,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/toggle-group",
       "type": "registry:item",
       "title": "Toggle Group (Core)",
       "description": "Editable imperative ToggleGroup recipe built on the tuiparts.sh packaged primitives.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/toggle-group/core.ts",
@@ -910,14 +999,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/toggle-group",
       "type": "registry:item",
       "title": "Toggle Group (React)",
       "description": "Editable React ToggleGroup recipe built on the tuiparts.sh packaged primitives.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/toggle-group/react.tsx",
@@ -931,14 +1024,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/toggle-group",
       "type": "registry:item",
       "title": "Toggle Group (Solid)",
       "description": "Editable Solid ToggleGroup recipe built on the tuiparts.sh packaged primitives.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/toggle-group/solid.tsx",
@@ -952,14 +1049,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/collapsible",
       "type": "registry:item",
       "title": "Collapsible (Core)",
       "description": "Editable imperative Collapsible Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/collapsible/core.ts",
@@ -973,14 +1074,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/collapsible",
       "type": "registry:item",
       "title": "Collapsible (React)",
       "description": "Editable React Collapsible Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/collapsible/react.tsx",
@@ -994,14 +1099,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/collapsible",
       "type": "registry:item",
       "title": "Collapsible (Solid)",
       "description": "Editable Solid Collapsible Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/collapsible/solid.tsx",
@@ -1015,14 +1124,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/tabs",
       "type": "registry:item",
       "title": "Tabs (Core)",
       "description": "Editable imperative Tabs Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/core@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/core@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/tabs/core.ts",
@@ -1036,14 +1149,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
     },
     {
       "name": "react/tabs",
       "type": "registry:item",
       "title": "Tabs (React)",
       "description": "Editable React Tabs Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/react@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/react@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/tabs/react.tsx",
@@ -1057,14 +1174,18 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/react/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
     },
     {
       "name": "solid/tabs",
       "type": "registry:item",
       "title": "Tabs (Solid)",
       "description": "Editable Solid Tabs Recipe built on the tuiparts.sh packaged Primitive.",
-      "dependencies": ["@tuiparts/solid@>=0.0.1 <0.1.0"],
+      "dependencies": [
+        "@tuiparts/solid@>=0.0.1 <0.1.0"
+      ],
       "files": [
         {
           "path": "registry/tabs/solid.tsx",
@@ -1078,7 +1199,9 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       },
-      "registryDependencies": ["https://tuiparts.sh/r/solid/theme.json"]
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     },
     {
       "name": "core/theme",
@@ -1156,7 +1279,9 @@
       "title": "Cobalt Deep Theme",
       "description": "Truecolor tuiparts.sh brand preset applied as a partial override of the installed theme contract.",
       "dependencies": [],
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"],
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ],
       "files": [
         {
           "path": "registry/theme/themes/cobalt-deep.ts",
@@ -1177,7 +1302,9 @@
       "title": "ASCII Theme",
       "description": "ASCII-glyph preset for fonts and terminals without Unicode coverage, applied as a partial override.",
       "dependencies": [],
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"],
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ],
       "files": [
         {
           "path": "registry/theme/themes/ascii.ts",
@@ -1198,7 +1325,9 @@
       "title": "Catppuccin Theme",
       "description": "Catppuccin Mocha/Latte.",
       "dependencies": [],
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"],
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ],
       "files": [
         {
           "path": "registry/theme/themes/catppuccin.ts",
@@ -1219,7 +1348,9 @@
       "title": "Gruvbox Theme",
       "description": "Gruvbox dark/light.",
       "dependencies": [],
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"],
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ],
       "files": [
         {
           "path": "registry/theme/themes/gruvbox.ts",
@@ -1240,7 +1371,9 @@
       "title": "Ros\u00e9 Pine Theme",
       "description": "Ros\u00e9 Pine/Dawn.",
       "dependencies": [],
-      "registryDependencies": ["https://tuiparts.sh/r/core/theme.json"],
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ],
       "files": [
         {
           "path": "registry/theme/themes/rosepine.ts",
@@ -1254,6 +1387,144 @@
         "sourceOwnership": "consumer",
         "updateStrategy": "shadcn-add"
       }
+    },
+    {
+      "name": "core/card",
+      "type": "registry:item",
+      "title": "Card (Core)",
+      "description": "Editable imperative Card recipe built directly from OpenTUI Renderables.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/card/core.ts",
+          "type": "registry:file",
+          "target": "components/ui/card.ts"
+        }
+      ],
+      "meta": {
+        "framework": "core",
+        "primitiveStatus": "recipe",
+        "sourceOwnership": "consumer",
+        "updateStrategy": "shadcn-add"
+      },
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
+    },
+    {
+      "name": "react/card",
+      "type": "registry:item",
+      "title": "Card (React)",
+      "description": "Editable React Card recipe built directly from OpenTUI elements.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/card/react.tsx",
+          "type": "registry:file",
+          "target": "components/ui/card.tsx"
+        }
+      ],
+      "meta": {
+        "framework": "react",
+        "primitiveStatus": "recipe",
+        "sourceOwnership": "consumer",
+        "updateStrategy": "shadcn-add"
+      },
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
+    },
+    {
+      "name": "solid/card",
+      "type": "registry:item",
+      "title": "Card (Solid)",
+      "description": "Editable Solid Card recipe built directly from OpenTUI elements.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/card/solid.tsx",
+          "type": "registry:file",
+          "target": "components/ui/card.tsx"
+        }
+      ],
+      "meta": {
+        "framework": "solid",
+        "primitiveStatus": "recipe",
+        "sourceOwnership": "consumer",
+        "updateStrategy": "shadcn-add"
+      },
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
+    },
+    {
+      "name": "core/separator",
+      "type": "registry:item",
+      "title": "Separator (Core)",
+      "description": "Editable imperative Separator recipe built directly from OpenTUI Renderables.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/separator/core.ts",
+          "type": "registry:file",
+          "target": "components/ui/separator.ts"
+        }
+      ],
+      "meta": {
+        "framework": "core",
+        "primitiveStatus": "recipe",
+        "sourceOwnership": "consumer",
+        "updateStrategy": "shadcn-add"
+      },
+      "registryDependencies": [
+        "https://tuiparts.sh/r/core/theme.json"
+      ]
+    },
+    {
+      "name": "react/separator",
+      "type": "registry:item",
+      "title": "Separator (React)",
+      "description": "Editable React Separator recipe built directly from OpenTUI elements.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/separator/react.tsx",
+          "type": "registry:file",
+          "target": "components/ui/separator.tsx"
+        }
+      ],
+      "meta": {
+        "framework": "react",
+        "primitiveStatus": "recipe",
+        "sourceOwnership": "consumer",
+        "updateStrategy": "shadcn-add"
+      },
+      "registryDependencies": [
+        "https://tuiparts.sh/r/react/theme.json"
+      ]
+    },
+    {
+      "name": "solid/separator",
+      "type": "registry:item",
+      "title": "Separator (Solid)",
+      "description": "Editable Solid Separator recipe built directly from OpenTUI elements.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/separator/solid.tsx",
+          "type": "registry:file",
+          "target": "components/ui/separator.tsx"
+        }
+      ],
+      "meta": {
+        "framework": "solid",
+        "primitiveStatus": "recipe",
+        "sourceOwnership": "consumer",
+        "updateStrategy": "shadcn-add"
+      },
+      "registryDependencies": [
+        "https://tuiparts.sh/r/solid/theme.json"
+      ]
     }
   ]
 }

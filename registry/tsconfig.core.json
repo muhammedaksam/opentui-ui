@@ -6,7 +6,6 @@
       "accordion",
       "badge",
       "button",
-      "card",
       "checkbox",
       "checkbox-group",
       "collapsible",
@@ -18,10 +17,16 @@
       "switch",
       "tabs",
       "textarea",
+      "card",
+      "separator",
       "theme",
       "toggle",
       "toggle-group"
     ]
   },
-  "include": ["*/core.ts", "theme/theme.ts", "theme/themes/*.ts"]
+  "include": [
+    "*/core.ts",
+    "theme/theme.ts",
+    "theme/themes/*.ts"
+  ]
 }

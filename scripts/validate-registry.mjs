@@ -81,7 +81,6 @@ const recipes = [
   "switch",
   "button",
   "badge",
-  "card",
   "radio-group",
   "input",
   "number-field",
@@ -92,6 +91,8 @@ const recipes = [
   "toggle-group",
   "tabs",
   "theme",
+  "card",
+  "separator",
 ];
 const catalogRecipes = [
   "accordion",
@@ -101,7 +102,6 @@ const catalogRecipes = [
   "switch",
   "button",
   "badge",
-  "card",
   "radio-group",
   "input",
   "number-field",
@@ -112,8 +112,15 @@ const catalogRecipes = [
   "toggle-group",
   "tabs",
   "theme",
+  "card",
+  "separator",
 ];
-const primitivelessRecipes = ["badge", "card", "theme"];
+const primitivelessRecipes = [
+  "badge",
+  "theme",
+  "card",
+  "separator",
+];
 const themePresets = [
   {
     item: "theme-cobalt-deep",

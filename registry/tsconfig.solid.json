@@ -8,7 +8,6 @@
       "accordion",
       "badge",
       "button",
-      "card",
       "checkbox",
       "checkbox-group",
       "collapsible",
@@ -20,11 +19,15 @@
       "switch",
       "tabs",
       "textarea",
+      "card",
+      "separator",
       "theme",
       "toggle",
       "toggle-group",
       "shims/solid"
     ]
   },
-  "include": ["*/solid.tsx"]
+  "include": [
+    "*/solid.tsx"
+  ]
 }

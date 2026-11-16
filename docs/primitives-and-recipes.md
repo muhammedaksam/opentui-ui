@@ -137,9 +137,10 @@ The starter catalog provides `core/*`, `react/*`, and `solid/*` items for:
 - Textarea
 - Dialog
 - Badge
-- Card
 - Toggle
 - ToggleGroup
+- separator
+- card
 - Tabs
 - Theme (token contract, store, and terminal default read by every recipe)
 
