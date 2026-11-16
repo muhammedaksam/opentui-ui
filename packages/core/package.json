@@ -29,7 +29,8 @@
     "./textarea": "./src/textarea/index.ts",
     "./toggle": "./src/toggle/index.ts",
     "./toggle-group": "./src/toggle-group/index.ts",
-    "./progress": "./src/progress/index.ts"
+    "./progress": "./src/progress/index.ts",
+    "./spinner": "./src/spinner/index.ts"
   },
   "publishConfig": {
     "main": "./dist/index.mjs",
@@ -106,6 +107,10 @@
       "./progress": {
         "types": "./dist/progress/index.d.mts",
         "import": "./dist/progress/index.mjs"
+      },
+      "./spinner": {
+        "types": "./dist/spinner/index.d.mts",
+        "import": "./dist/spinner/index.mjs"
       }
     }
   },

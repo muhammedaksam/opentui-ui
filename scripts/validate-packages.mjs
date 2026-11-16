@@ -106,6 +106,7 @@ try {
     "@tuiparts/core/radio",
     "@tuiparts/core/radio-group",
     "@tuiparts/core/slider",
+    "@tuiparts/core/spinner",
     "@tuiparts/core/switch",
     "@tuiparts/core/tabs",
     "@tuiparts/core/textarea",
@@ -124,6 +125,7 @@ try {
     "@tuiparts/react/radio",
     "@tuiparts/react/radio-group",
     "@tuiparts/react/slider",
+    "@tuiparts/react/spinner",
     "@tuiparts/react/switch",
     "@tuiparts/react/tabs",
     "@tuiparts/react/textarea",
@@ -142,6 +144,7 @@ try {
     "@tuiparts/solid/radio",
     "@tuiparts/solid/radio-group",
     "@tuiparts/solid/slider",
+    "@tuiparts/solid/spinner",
     "@tuiparts/solid/switch",
     "@tuiparts/solid/tabs",
     "@tuiparts/solid/textarea",
@@ -247,6 +250,10 @@ import {
   SliderTrackRenderable,
 } from "@tuiparts/core/slider";
 import {
+  SpinnerIndicatorRenderable,
+  SpinnerRootRenderable,
+} from "@tuiparts/core/spinner";
+import {
   TabsListRenderable,
   TabsPanelRenderable,
   TabsRootRenderable,
@@ -349,6 +356,15 @@ try {
   slider.store.finishPointer();
   if (slider.value !== 3)
     throw new Error("Compiled Slider did not request its pointer value");
+
+  const spinner = new SpinnerRootRenderable(setup.renderer);
+  const spinnerIndicator = new SpinnerIndicatorRenderable(setup.renderer, {
+    store: spinner.store,
+  });
+  spinner.add(spinnerIndicator);
+  setup.renderer.root.add(spinner);
+  if (spinner.frameIndex !== 0)
+    throw new Error("Compiled Spinner did not initialize its frame");
 
   const progress = new ProgressRootRenderable(setup.renderer, {
     defaultValue: 50,

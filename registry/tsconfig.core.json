@@ -22,6 +22,7 @@
       "kbd",
       "skeleton",
       "progress",
+      "spinner",
       "theme",
       "toggle",
       "toggle-group"

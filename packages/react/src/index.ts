@@ -11,6 +11,7 @@ export * from "./progress";
 export * from "./radio";
 export * from "./radio-group";
 export * from "./slider";
+export * from "./spinner";
 export * from "./switch";
 export * from "./tabs";
 export * from "./textarea";
