@@ -48,6 +48,7 @@
       "menubar",
       "diff-viewer",
       "markdown-viewer",
+      "ascii-banner",
       "theme",
       "toggle",
       "toggle-group",

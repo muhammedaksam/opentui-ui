@@ -58,7 +58,7 @@ behavior standard.
 
 The Catalog includes editable Recipes for Accordion, Badge, Button, Checkbox,
 Checkbox Group, Collapsible, Dialog, Input, Number Field, Radio Group, Slider,
-Switch, Tabs, Textarea, Toggle, and Toggle Group, plus aspect-ratio, avatar, breadcrumb, card, combobox, command, context-menu, diff-viewer, drawer, dropdown-menu, empty, field, hover-card, input-group, input-otp, kbd, markdown-viewer, menubar, pagination, progress, resizable, scroll-area, select, separator, sheet, skeleton, spinner, table, tooltip. Every Recipe is available for
+Switch, Tabs, Textarea, Toggle, and Toggle Group, plus ascii-banner, aspect-ratio, avatar, breadcrumb, card, combobox, command, context-menu, diff-viewer, drawer, dropdown-menu, empty, field, hover-card, input-group, input-otp, kbd, markdown-viewer, menubar, pagination, progress, resizable, scroll-area, select, separator, sheet, skeleton, spinner, table, tooltip. Every Recipe is available for
 Core, React, and Solid.
 
 Interactive Recipes build on packaged Primitives. Badge is Recipe-only because
