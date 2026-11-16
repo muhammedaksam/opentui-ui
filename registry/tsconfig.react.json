@@ -45,6 +45,7 @@
       "combobox",
       "dropdown-menu",
       "context-menu",
+      "menubar",
       "theme",
       "toggle",
       "toggle-group",
