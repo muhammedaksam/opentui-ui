@@ -43,6 +43,7 @@
       "resizable",
       "command",
       "combobox",
+      "dropdown-menu",
       "theme",
       "toggle",
       "toggle-group",

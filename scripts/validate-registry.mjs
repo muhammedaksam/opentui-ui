@@ -115,6 +115,7 @@ const recipes = [
   "resizable",
   "command",
   "combobox",
+  "dropdown-menu",
 ];
 const catalogRecipes = [
   "accordion",
@@ -158,6 +159,7 @@ const catalogRecipes = [
   "resizable",
   "command",
   "combobox",
+  "dropdown-menu",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -184,6 +186,7 @@ const primitivelessRecipes = [
   "resizable",
   "command",
   "combobox",
+  "dropdown-menu",
 ];
 const themePresets = [
   {
