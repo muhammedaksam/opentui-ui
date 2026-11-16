@@ -46,6 +46,7 @@
       "dropdown-menu",
       "context-menu",
       "menubar",
+      "diff-viewer",
       "theme",
       "toggle",
       "toggle-group",

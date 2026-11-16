@@ -118,6 +118,7 @@ const recipes = [
   "dropdown-menu",
   "context-menu",
   "menubar",
+  "diff-viewer",
 ];
 const catalogRecipes = [
   "accordion",
@@ -164,6 +165,7 @@ const catalogRecipes = [
   "dropdown-menu",
   "context-menu",
   "menubar",
+  "diff-viewer",
 ];
 const primitivelessRecipes = [
   "badge",
@@ -193,6 +195,7 @@ const primitivelessRecipes = [
   "dropdown-menu",
   "context-menu",
   "menubar",
+  "diff-viewer",
 ];
 const themePresets = [
   {

@@ -21,6 +21,7 @@ export default defineMeta({
     "radio-group",
     "dialog",
     "badge",
+    "diff-viewer",
     "menubar",
     "context-menu",
     "dropdown-menu",

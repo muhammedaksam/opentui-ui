@@ -892,6 +892,18 @@ Reference implementations:
 - `registry/menubar/react.tsx`
 - `registry/menubar/solid.tsx`
 
+## DiffViewer Recipe
+
+DiffViewer is a consumer-owned, TUI-native recipe that wraps OpenTUI's
+`DiffRenderable`. It packages theme border framing, header file metadata,
+and view mode toggles without requiring a custom diff engine.
+
+Reference implementations:
+
+- `registry/diff-viewer/core.ts`
+- `registry/diff-viewer/react.tsx`
+- `registry/diff-viewer/solid.tsx`
+
 ## Distribution
 
 A shadcn-like OpenTUI experience requires a registry that copies
