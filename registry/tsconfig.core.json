@@ -36,6 +36,7 @@
       "select",
       "tooltip",
       "hover-card",
+      "sheet",
       "theme",
       "toggle",
       "toggle-group"
