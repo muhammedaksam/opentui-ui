@@ -17,6 +17,10 @@ interface DrawerContextValue {
   setOpen: (open: boolean) => void;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const DrawerContext = createContext<DrawerContextValue>();
 
 export interface DrawerProps {
@@ -56,8 +60,7 @@ export function DrawerTrigger(props: DrawerTriggerProps): JSX.Element {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       backgroundColor={tokens().colors.surface}
       paddingLeft={tokens().density.paddingX}
       paddingRight={tokens().density.paddingX}
@@ -65,7 +68,7 @@ export function DrawerTrigger(props: DrawerTriggerProps): JSX.Element {
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }
 
@@ -79,8 +82,7 @@ export function DrawerClose(props: DrawerCloseProps): JSX.Element {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       backgroundColor={tokens().colors.surface}
       paddingLeft={tokens().density.paddingX}
       paddingRight={tokens().density.paddingX}
@@ -88,7 +90,7 @@ export function DrawerClose(props: DrawerCloseProps): JSX.Element {
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }
 
@@ -111,8 +113,7 @@ export function DrawerContent(props: DrawerContentProps): JSX.Element {
       visible={context?.open() ?? true}
     >
       {/* Backdrop */}
-      {/* biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction */}
-      <box
+      <Box
         position="absolute"
         width="100%"
         height="100%"

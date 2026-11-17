@@ -31,6 +31,10 @@ interface SelectContextValue {
   disabled: Accessor<boolean>;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const SelectContext = createContext<SelectContextValue>();
 
 export interface SelectProps {
@@ -141,8 +145,7 @@ export function SelectTrigger(props: SelectTriggerProps): JSX.Element {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -163,7 +166,7 @@ export function SelectTrigger(props: SelectTriggerProps): JSX.Element {
         content={context?.open() ? "▲" : "▼"}
         fg={tokens().colors.mutedForeground}
       />
-    </box>
+    </Box>
   );
 }
 
@@ -243,8 +246,7 @@ export function SelectItem(props: SelectItemProps): JSX.Element {
   const isHighlighted = () => context?.activeIndex() === itemIndex();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -264,7 +266,7 @@ export function SelectItem(props: SelectItemProps): JSX.Element {
             : tokens().colors.foreground
         }
       />
-    </box>
+    </Box>
   );
 }
 

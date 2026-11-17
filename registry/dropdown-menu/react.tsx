@@ -17,6 +17,10 @@ interface DropdownMenuContextValue {
   setOpen: (open: boolean) => void;
 }
 
+const Box = (props: BoxOptions & { children?: ReactNode }) => (
+  <box {...props} />
+);
+
 const DropdownMenuContext = createContext<DropdownMenuContextValue | null>(
   null,
 );
@@ -81,8 +85,7 @@ export function DropdownMenuTrigger({
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       border
       borderStyle="single"
       borderColor={tokens.colors.border}
@@ -99,7 +102,7 @@ export function DropdownMenuTrigger({
       ) : (
         children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -156,8 +159,7 @@ export function DropdownMenuItem({
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -177,7 +179,7 @@ export function DropdownMenuItem({
       ) : (
         children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -202,8 +204,7 @@ export function DropdownMenuCheckboxItem({
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -220,7 +221,7 @@ export function DropdownMenuCheckboxItem({
           children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 
@@ -247,8 +248,7 @@ export function DropdownMenuRadioItem({
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -265,7 +265,7 @@ export function DropdownMenuRadioItem({
           children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 

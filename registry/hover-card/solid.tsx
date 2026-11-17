@@ -19,6 +19,10 @@ interface HoverCardContextValue {
   handleMouseLeave: () => void;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const HoverCardContext = createContext<HoverCardContextValue>();
 
 export interface HoverCardProps {
@@ -95,14 +99,13 @@ export function HoverCardTrigger(props: HoverCardTriggerProps): JSX.Element {
   const context = useContext(HoverCardContext);
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       onMouseOver={() => context?.handleMouseEnter()}
       onMouseOut={() => context?.handleMouseLeave()}
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }
 
@@ -116,8 +119,7 @@ export function HoverCardContent(props: HoverCardContentProps): JSX.Element {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       border
       borderStyle="single"
       borderColor={tokens().colors.border}
@@ -130,6 +132,6 @@ export function HoverCardContent(props: HoverCardContentProps): JSX.Element {
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }

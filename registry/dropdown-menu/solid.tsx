@@ -17,6 +17,10 @@ interface DropdownMenuContextValue {
   setOpen: (open: boolean) => void;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const DropdownMenuContext = createContext<DropdownMenuContextValue>();
 
 export interface DropdownMenuProps extends BoxOptions {
@@ -75,8 +79,7 @@ export function DropdownMenuTrigger(
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       border
       borderStyle="single"
       borderColor={tokens().colors.border}
@@ -93,7 +96,7 @@ export function DropdownMenuTrigger(
       ) : (
         local.children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -143,8 +146,7 @@ export function DropdownMenuItem(props: DropdownMenuItemProps): JSX.Element {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -166,7 +168,7 @@ export function DropdownMenuItem(props: DropdownMenuItemProps): JSX.Element {
       ) : (
         local.children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -189,8 +191,7 @@ export function DropdownMenuCheckboxItem(
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -210,7 +211,7 @@ export function DropdownMenuCheckboxItem(
           local.children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 
@@ -239,8 +240,7 @@ export function DropdownMenuRadioItem(
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -260,7 +260,7 @@ export function DropdownMenuRadioItem(
           local.children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 

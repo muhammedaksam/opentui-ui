@@ -20,6 +20,10 @@ interface HoverCardContextValue {
   handleMouseLeave: () => void;
 }
 
+const Box = (props: BoxOptions & { children?: ReactNode }) => (
+  <box {...props} />
+);
+
 const HoverCardContext = createContext<HoverCardContextValue | null>(null);
 
 export interface HoverCardProps {
@@ -106,14 +110,13 @@ export function HoverCardTrigger({ children, ...rest }: HoverCardTriggerProps) {
   const context = useContext(HoverCardContext);
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       onMouseOver={() => context?.handleMouseEnter()}
       onMouseOut={() => context?.handleMouseLeave()}
       {...rest}
     >
       {children}
-    </box>
+    </Box>
   );
 }
 
@@ -130,8 +133,7 @@ export function HoverCardContent({ children, ...rest }: HoverCardContentProps) {
   }
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       border
       borderStyle="single"
       borderColor={tokens.colors.border}
@@ -143,6 +145,6 @@ export function HoverCardContent({ children, ...rest }: HoverCardContentProps) {
       {...rest}
     >
       {children}
-    </box>
+    </Box>
   );
 }

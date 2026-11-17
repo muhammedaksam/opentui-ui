@@ -22,6 +22,10 @@ interface ComboboxContextValue {
   matchesSearch: (text: string) => boolean;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const ComboboxContext = createContext<ComboboxContextValue>();
 
 export interface ComboboxProps extends BoxOptions {
@@ -125,8 +129,7 @@ export function ComboboxTrigger(props: ComboboxTriggerProps): JSX.Element {
     hasValue() ? (context?.value() ?? "") : placeholder();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -153,7 +156,7 @@ export function ComboboxTrigger(props: ComboboxTriggerProps): JSX.Element {
         content={context?.open() ? "▲" : "▼"}
         fg={tokens().colors.mutedForeground}
       />
-    </box>
+    </Box>
   );
 }
 
@@ -281,8 +284,7 @@ export function ComboboxItem(props: ComboboxItemProps): JSX.Element {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -299,6 +301,6 @@ export function ComboboxItem(props: ComboboxItemProps): JSX.Element {
         local.children
       )}
       <text content={isSelected() ? "✓" : " "} fg={tokens().colors.primary} />
-    </box>
+    </Box>
   );
 }

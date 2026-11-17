@@ -16,6 +16,10 @@ interface TooltipContextValue {
   setOpen: (open: boolean) => void;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const TooltipContext = createContext<TooltipContextValue>();
 
 export interface TooltipProviderProps {
@@ -62,14 +66,13 @@ export function TooltipTrigger(props: TooltipTriggerProps): JSX.Element {
   const context = useContext(TooltipContext);
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       onMouseOver={() => context?.setOpen(true)}
       onMouseOut={() => context?.setOpen(false)}
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }
 

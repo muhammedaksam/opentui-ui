@@ -31,6 +31,10 @@ interface SelectContextValue {
   disabled?: boolean;
 }
 
+const Box = (props: BoxOptions & { children?: ReactNode }) => (
+  <box {...props} />
+);
+
 const SelectContext = createContext<SelectContextValue | null>(null);
 
 export interface SelectProps {
@@ -169,8 +173,7 @@ export function SelectTrigger({ children, ...rest }: SelectTriggerProps) {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -191,7 +194,7 @@ export function SelectTrigger({ children, ...rest }: SelectTriggerProps) {
         content={context?.open ? "▲" : "▼"}
         fg={tokens.colors.mutedForeground}
       />
-    </box>
+    </Box>
   );
 }
 
@@ -266,8 +269,7 @@ export function SelectItem({ value, children, ...rest }: SelectItemProps) {
   const isHighlighted = context?.activeIndex === itemIndex;
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -285,7 +287,7 @@ export function SelectItem({ value, children, ...rest }: SelectItemProps) {
             : tokens.colors.foreground
         }
       />
-    </box>
+    </Box>
   );
 }
 

@@ -17,6 +17,10 @@ interface MenubarContextValue {
   setValue: (value: string | null) => void;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const MenubarContext = createContext<MenubarContextValue>();
 
 export interface MenubarProps extends BoxOptions {
@@ -127,8 +131,7 @@ export function MenubarTrigger(props: MenubarTriggerProps): JSX.Element {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       paddingX={1}
       height={1}
       alignItems="center"
@@ -147,7 +150,7 @@ export function MenubarTrigger(props: MenubarTriggerProps): JSX.Element {
       ) : (
         local.children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -196,8 +199,7 @@ export function MenubarItem(props: MenubarItemProps): JSX.Element {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -219,7 +221,7 @@ export function MenubarItem(props: MenubarItemProps): JSX.Element {
       ) : (
         local.children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -242,8 +244,7 @@ export function MenubarCheckboxItem(
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -263,7 +264,7 @@ export function MenubarCheckboxItem(
           local.children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 
@@ -305,8 +306,7 @@ export function MenubarRadioItem(props: MenubarRadioItemProps): JSX.Element {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -326,7 +326,7 @@ export function MenubarRadioItem(props: MenubarRadioItemProps): JSX.Element {
           local.children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 

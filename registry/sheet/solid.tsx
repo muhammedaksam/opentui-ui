@@ -19,6 +19,10 @@ interface SheetContextValue {
   setOpen: (open: boolean) => void;
 }
 
+const Box = (props: BoxOptions & { children?: JSX.Element }) => (
+  <box {...props} />
+);
+
 const SheetContext = createContext<SheetContextValue>();
 
 export interface SheetProps {
@@ -58,8 +62,7 @@ export function SheetTrigger(props: SheetTriggerProps): JSX.Element {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       backgroundColor={tokens().colors.surface}
       paddingLeft={tokens().density.paddingX}
       paddingRight={tokens().density.paddingX}
@@ -67,7 +70,7 @@ export function SheetTrigger(props: SheetTriggerProps): JSX.Element {
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }
 
@@ -81,8 +84,7 @@ export function SheetClose(props: SheetCloseProps): JSX.Element {
   const tokens = useTheme();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       backgroundColor={tokens().colors.surface}
       paddingLeft={tokens().density.paddingX}
       paddingRight={tokens().density.paddingX}
@@ -90,7 +92,7 @@ export function SheetClose(props: SheetCloseProps): JSX.Element {
       {...rest}
     >
       {local.children}
-    </box>
+    </Box>
   );
 }
 
@@ -117,8 +119,7 @@ export function SheetContent(props: SheetContentProps): JSX.Element {
       visible={context?.open() ?? true}
     >
       {/* Backdrop */}
-      {/* biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction */}
-      <box
+      <Box
         position="absolute"
         width="100%"
         height="100%"

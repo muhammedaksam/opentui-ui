@@ -17,6 +17,10 @@ interface MenubarContextValue {
   setValue: (value: string | null) => void;
 }
 
+const Box = (props: BoxOptions & { children?: ReactNode }) => (
+  <box {...props} />
+);
+
 const MenubarContext = createContext<MenubarContextValue | null>(null);
 
 export interface MenubarProps extends BoxOptions {
@@ -137,8 +141,7 @@ export function MenubarTrigger({ children, ...rest }: MenubarTriggerProps) {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       paddingX={1}
       height={1}
       alignItems="center"
@@ -155,7 +158,7 @@ export function MenubarTrigger({ children, ...rest }: MenubarTriggerProps) {
       ) : (
         children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -210,8 +213,7 @@ export function MenubarItem({
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -231,7 +233,7 @@ export function MenubarItem({
       ) : (
         children
       )}
-    </box>
+    </Box>
   );
 }
 
@@ -256,8 +258,7 @@ export function MenubarCheckboxItem({
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -274,7 +275,7 @@ export function MenubarCheckboxItem({
           children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 
@@ -318,8 +319,7 @@ export function MenubarRadioItem({
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -336,7 +336,7 @@ export function MenubarRadioItem({
           children
         )}
       </box>
-    </box>
+    </Box>
   );
 }
 

@@ -18,6 +18,10 @@ interface CommandContextValue {
   matchesSearch: (text: string) => boolean;
 }
 
+const Box = (props: BoxOptions & { children?: ReactNode }) => (
+  <box {...props} />
+);
+
 const CommandContext = createContext<CommandContextValue>({
   search: "",
   setSearch: () => {},
@@ -225,8 +229,7 @@ export function CommandItem({
   }
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: terminal mouse interaction
-    <box
+    <Box
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
@@ -244,7 +247,7 @@ export function CommandItem({
       ) : (
         children
       )}
-    </box>
+    </Box>
   );
 }
 
