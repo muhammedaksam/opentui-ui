@@ -64,3 +64,16 @@ test("restyles the rendered skeleton on theme switch", async () => {
     theme.setActive("terminal");
   });
 });
+
+test("supports disabling pulse animation via animate={false}", async () => {
+  setup = await testRender(
+    <Skeleton id="static-skel" height={1} width={10} animate={false} />,
+    { width: 30, height: 5 },
+  );
+  await setup.renderOnce();
+
+  const skeleton = setup.renderer.root.findDescendantById(
+    "static-skel",
+  ) as BoxRenderable;
+  expect(skeleton.opacity).toBe(1);
+});

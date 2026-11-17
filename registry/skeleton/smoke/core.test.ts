@@ -50,4 +50,34 @@ describe("installed Core Skeleton recipe", () => {
     theme.setActive("terminal");
     expect(skeleton.backgroundColor.equals(parseColor("#123456"))).toBe(false);
   });
+
+  it("supports disabling pulse animation via animate: false", async () => {
+    setup = await createTestRenderer({ width: 30, height: 5 });
+    const skeleton = createSkeleton(setup.renderer, {
+      width: 10,
+      height: 1,
+      animate: false,
+    });
+    setup.renderer.root.add(skeleton);
+    await setup.renderOnce();
+
+    expect(skeleton.opacity).toBe(1);
+  });
+
+  it("pulses opacity when animation is enabled", async () => {
+    setup = await createTestRenderer({ width: 30, height: 5 });
+    const skeleton = createSkeleton(setup.renderer, {
+      width: 10,
+      height: 1,
+      animate: true,
+    });
+    setup.renderer.root.add(skeleton);
+    await setup.renderOnce();
+
+    expect(skeleton.opacity).toBe(1);
+    await new Promise((r) => setTimeout(r, 400));
+    expect(skeleton.opacity).toBeLessThan(1);
+    expect(skeleton.opacity).toBeGreaterThanOrEqual(0.4);
+    skeleton.destroy();
+  });
 });

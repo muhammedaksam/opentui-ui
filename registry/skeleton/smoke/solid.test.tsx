@@ -62,4 +62,17 @@ describe("installed Solid Skeleton recipe", () => {
     expect(setup.renderer.root.findDescendantById("themed")).toBe(skeleton);
     theme.setActive("terminal");
   });
+
+  it("supports disabling pulse animation via animate={false}", async () => {
+    setup = await testRender(
+      () => <Skeleton id="static-skel" height={1} width={10} animate={false} />,
+      { width: 30, height: 5 },
+    );
+    await setup.renderOnce();
+
+    const skeleton = setup.renderer.root.findDescendantById(
+      "static-skel",
+    ) as BoxRenderable;
+    expect(skeleton.opacity).toBe(1);
+  });
 });
