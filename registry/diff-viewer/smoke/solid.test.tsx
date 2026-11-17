@@ -14,7 +14,7 @@ afterEach(() => {
 
 const sampleDiff = `--- a/index.ts
 +++ b/index.ts
-@@ -1,2 +1,2 @@
+@@ -1 +1 @@
 -const hello = "world";
 +const hello = "open-tui";
 `;
@@ -38,5 +38,7 @@ describe("installed Solid DiffViewer recipe", () => {
     const output = setup.captureCharFrame();
     expect(output).toContain("index.ts");
     expect(output).toContain("UNIFIED");
+    expect(output).toContain("open-tui");
+    expect(output).not.toContain("Error parsing diff");
   });
 });

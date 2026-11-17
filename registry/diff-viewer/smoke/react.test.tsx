@@ -15,7 +15,7 @@ afterEach(async () => {
 
 const sampleDiff = `--- a/index.ts
 +++ b/index.ts
-@@ -1,2 +1,2 @@
+@@ -1 +1 @@
 -const hello = "world";
 +const hello = "open-tui";
 `;
@@ -36,4 +36,6 @@ test("installed React DiffViewer recipe renders patch with header", async () => 
   const output = setup.captureCharFrame();
   expect(output).toContain("index.ts");
   expect(output).toContain("UNIFIED");
+  expect(output).toContain("open-tui");
+  expect(output).not.toContain("Error parsing diff");
 });
