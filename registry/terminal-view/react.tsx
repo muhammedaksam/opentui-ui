@@ -1,3 +1,5 @@
+const lineKey = (line: string, index: number): string => `${index}-${line}`;
+
 /** @jsxImportSource @opentui/react */
 
 import type { BoxOptions } from "@opentui/core";
@@ -46,10 +48,10 @@ export function TerminalView({
         <box width={5} />
       </box>
       <box flexDirection="column" flexGrow={1} paddingX={1} paddingY={0}>
-        {lines.map((line, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: sequential line index
-          <text key={i} content={line} />
-        ))}
+        {lines.map((line, i) => {
+          const key = lineKey(line, i);
+          return <text key={key} content={line} />;
+        })}
         {children}
         {prompt !== undefined && (
           <box flexDirection="row" alignItems="center" gap={1}>
